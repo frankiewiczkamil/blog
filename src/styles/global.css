@@ -1,0 +1,78 @@
+html {
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+}
+
+@font-face {
+    font-family: 'chosenOne';
+    src: url('/fonts/Lovato\ Regular.otf');
+}
+
+body {
+    font-family: chosenOne, Verdana, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: rgb(232, 232, 203);
+        background-color: rgb(23, 23, 32);
+    }
+
+    .dimmed {
+        color: rgb(178, 178, 149);
+    }
+
+    .border__dimmed {
+        border-color: rgb(178, 178, 149);
+    }
+
+    a {
+        color: #df6363;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: rgb(232, 232, 203);
+        color: rgb(23, 23, 32);
+    }
+
+    .dimmed {
+        color: gray
+    }
+
+    .border__dimmed {
+        border-color: gray;
+    }
+
+    a {
+        color: #72490b;
+    }
+}
+
+
+
+body {
+    margin: 0 auto;
+    max-width: 120ch;
+    padding: 1rem;
+    /* width: 100%; */
+    /* line-height: 1.5; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    border-bottom: solid;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}

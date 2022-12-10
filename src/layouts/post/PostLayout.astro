@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../BaseLayout.astro";
+import "./postLayout.css";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+    <p>Published on: {frontmatter.pubDate.slice(0, 10)}</p>
+    <h1>{frontmatter.title}</h1>
+    <div>
+        <img
+            width="100%"
+            src={frontmatter?.image?.url}
+            alt={frontmatter?.image?.alt}
+        />
+    </div>
+    <slot />
+</BaseLayout>
