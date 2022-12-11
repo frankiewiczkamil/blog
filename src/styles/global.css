@@ -12,6 +12,15 @@ body {
     font-family: chosenOne, Verdana, sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         color: rgb(232, 232, 203);
@@ -28,6 +37,11 @@ body {
 
     a {
         color: #df6363;
+    }
+
+    a:hover,
+    a:focus {
+        text-decoration-color: #A1DF63;
     }
 }
 
@@ -48,6 +62,11 @@ body {
     a {
         color: #72490b;
     }
+
+    a:hover,
+    a:focus {
+        text-decoration-color: #0B7215;
+    }
 }
 
 
@@ -66,13 +85,4 @@ body {
 
 header {
     border-bottom: solid;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover,
-a:focus {
-    text-decoration: underline;
 }
