@@ -1,18 +1,20 @@
 ---
 layout: ../../layouts/post/PostLayout.astro
-title: State modification in function components without sacrificing the performance
-publishedAt: 2022-12-15
-# editedAt: 2022-12-?
-description: How to change state in function components without sacrificing performance
+title: State modification in functional components without sacrificing the performance
+publishedAt: 2022-12-14
+editedAt: 2022-12-15
+description: How to change state in functional components without sacrificing performance
 author: kpf
-tags: ['function component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
+tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
 # image: 
 #     url: /img/.jpg
 ---
+## Introduction
 
-## Introduction: react as a fast library for DOM manipulation
-I remember the first time when I've heard about react. It was almost 10 years ago and at that time I was using state-of-the-art library: angular.js. Angular.js (aka angular v1) was using the concept of two way data binding. It seemed cool at first, but it had several problems that I've encountered while using it. The most painfull in our work were:
- - debugging issues
+I remember the first time when I've heard about react. It was almost 10 years ago and at that time I was using state-of-the-art library: angular.js. 
+
+Angular.js (aka angular v1) is a two way data binding library. It seemed cool at first, but I've encountered several kind of problems while using it. The most painfull were:
+ - debugging issues, and
  - poor performance
 
 In this circumstances I was very intrigued by the promise of extraordinary performance and simplicity that this new library was adversided as. Then react native was announced which made me even more curious.
@@ -22,26 +24,35 @@ Some time later an opportunity to use it finally came: a new project - set of ap
 One may ask now: so why it wasn't fast from the beginning?
 And my answer would be: because we were not preventing unnecessary renders.
 
-## React performance gotchas
+## When does it render
+
+Quick reminder: react is one way data binding library, that detects DOM elements which need to be updated by *comparing* tracked data (state and props of a component). In other words, the rule is more or less that the component is rendered when:
+ - props have changed [^1], and/or
+ - state has changed [^1],  and/or
+ - parent component has changed and will be re-rendered [^2]
 
 
-Quick reminder: react is one way data binding library, that detects DOM elements which need to be updated by *comparing* tracked data (state and props of a component). In other words, the rule is more or less that the component is rendered when1:
- - props have changed, and/or
- - state has changed,  and/or
- - parent component has changed and will be re-rendered
+Now we need to understand, that the comparison that is performed is **shallow** - reference only, so:
+```javascript
+{} === {} // false
+```
+What about callbacks, that we want to use in our components then? Well, functions are first class citizens in js, so the same rules apply here:
+ ```javascript
+(x => x) === (x => x) // false
+ ```
 
 
-Now we need to understand, that the comparison that is performed is *shallow* - reference only, so `{} !== {}`. This is something that we learned quite quickly.
-What about callbacks, that we want to use in our components then? Well, functions are first class citizens in js, so the same rules apply here as well: `() => {} !== () => {}`. 
-So if we pass a callback that performs state changes (or anything else), it causes a re-render if function reference changes.
-And this is not a big deal in class components, because classes have *methods*, and method reference does not change. Of course, there is a _this_ pitfall, so one needs to either bind the method or use a (misleading) arrow syntax for methods instead of wrapping in annonymous functions, because the latter changes reference like it was described above.
+So if we pass a callback as a prop, it will cause a re-render everytime function reference changes.
+And this is not a big deal in class components, because classes have **methods**, and method reference does not change. Of course, there is a `this` caveat, so one needs to either bind the method or use a (misleading) arrow syntax for methods instead of using annonymous functions, because the latter changes reference as we have already seen above. That's something I've learned quite quickly, easy-peasy.
 
-However, in function component we don't have methods.  In function components we have hooks, in particular `useState`, which returns a handle to mutating callback function. And guess what: the reference of the function changes on every component call, `useCallback` can't help here. 
+Now what about functional components? Functions don't have methods, but since v16.8 we have hooks, that should serve more or less same purpose as methods (including those extended from `Component` class). In particular there is a `useState`, which returns a handle to mutating callback function. The reference of this function doesn't change - cool, we are safe. But are we? Sometimes we want to encapsulate some logic that will decide *what* to save, instead of passing down the state and callback to a child component. And in such situations we have to create an anonymous function, thus, a new reference. But one might say now: that's fine, we have `useCallback` that is capable of momoizing a reference, by ignoring every change on a state value not defined as a dependency. 
 
-Now, one might ask: is this really a problem? The reference to callback will change when the previous callback performs state change, right? 
-Right, but that's *not* the only case. In some situations, child component uses a callback from its parent, but does not use a state or uses only a state derivate, meaning there is no need to rerender the child every time parent's state changed. Moreover, a component that defines `useState`'s callback may be re-rendered for reasons not related with this particular state (it can be some other state it has or some props that changed or parent re-render) 
+And that is true, but we might need this value in our callback.
 
-Consider this example: there is a container (aka 'smart component') with a state, containing a 'dumb' component that uses some callback from it's parent - container. 
+So is this really a problem? A reference to a callback will change when the previous callback performs state change that we are interested in, right? 
+Yes and no. In some situations the prop that we need in a child component can be some sort of a derivate of our state, or even we might not need this state at all. In such cases there is no need to re-render the child every time parent's state changed, but we can't avoid it due to limitation that I've pointed out.
+
+I guess it might be little confusing at this point, so let's consider an example: there is a container (aka 'smart component') with a state, containing a 'dumb' component that uses some callback from it's parent - container. 
 
 It may look like this:
 ```javascript
@@ -122,7 +133,7 @@ I don't like both ~solutions~ workarounds. I'm aware that components with a stat
 
 Can we do better? Sure, what would be the point of writing all this if there wasn't a solution ;)
 
-So if we want to stick to the function components, the easiest way that I can recommend is to mimic flux model with `useReducer` hook.
+So if we want to stick to the functional components, the easiest way that I can recommend is to mimic flux model with `useReducer` hook.
 It may look like this:
 ```javascript
 const initialState = 0;
@@ -158,5 +169,10 @@ function Container(_props) {
 }
 ```
 
-I'll try to link the post that inspired me when I'll find it. The point is we have here something like `useCallback`, but working together with `useState`'s setter 🎉
+I'll try to link the post that inspired me when I'll find it. The point is we have here something like `useCallback`, but working safely together with `useState`'s setter like a class method 🎉
 
+## Conclusion
+todo 🚧
+
+[^1]: unless prevented by using: `shouldComponentUpdate()`
+[^2]: unless prevented by using on of: `PureComponent`, `memo()`, `shouldComponentUpdate()`
