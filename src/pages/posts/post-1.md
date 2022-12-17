@@ -7,7 +7,8 @@ description: "The first one - who am I, what I'll do here, why and why so late"
 author: 'kpf'
 tags: ["personal", "blogging", "lurker"]
 image: 
-    url: /img/avenue.jpg
+    url: /img/avenue.webp
+    alt: avenue
 ---
 The time has come, and I decided to finally expose some of my thoughts to the world. I've been a pure lurker for years and to be honest I'm still not sure if my perspective might be something interesting to anyone. However, one of the goals here is to fight my imposter syndrome and my inner critic, so it seems a good idea to give it a shot.
 
