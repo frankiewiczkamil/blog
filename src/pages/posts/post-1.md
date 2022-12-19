@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post/PostLayout.astro
 title: 'Hello, world × What × Why'
-publishedAt: 2022-12-03
-editedAt: 2022-12-11
+publishedAt: '2022-12-03'
+editedAt: '2022-12-11'
 description: "The first one - who am I, what I'll do here, why and why so late"
 author: 'kpf'
 tags: ["personal", "blogging", "lurker"]

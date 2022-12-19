@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post/PostLayout.astro
 title: State modification in functional components without sacrificing the performance
-publishedAt: 2022-12-14
-editedAt: 2022-12-16
+publishedAt: '2022-12-14'
+editedAt: '2022-12-16'
 description: How to change state in functional components without sacrificing performance
 author: kpf
 tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
