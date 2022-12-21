@@ -18,9 +18,9 @@ Angular.js (aka angular v1) is a two-way data binding library. It seemed cool at
  - debugging issues, and
  - poor performance
 
-In this circumstances, I was very intrigued by the promise of extraordinary performance and simplicity that this new library was advertised as. Then react native was announced which made me even more curious.
+In this circumstances, I was very intrigued by the promise of extraordinary performance and simplicity that this new library - react - was advertised as. Then react native was announced which made me even more curious.
 
-Sometime later an opportunity to use it finally came: a new project - a set of video-related apps for various platforms, including 2x web, android and apple devices. We already had some experience in that domain and we knew, that performance is crucial here. We picked react of course, because 'react is super fast'. Except it wasn't. At least not until we learned how to use it properly.
+Sometime later an opportunity to use it seriously finally came: a new project - a set of video-related apps for various platforms, including 2x web, android and apple devices. We already had some experience in that domain and we knew, that performance is crucial here. We picked react of course, because 'react is super fast'. Except it wasn't. At least not until we learned how to use it properly.
 
 One may ask now: so why it wasn't fast from the beginning?
 And my answer would be: because we were not preventing unnecessary renders.
@@ -44,16 +44,18 @@ What about callbacks, that we want to use in our components then? Well, function
 
 
 So if we pass a callback as a prop, it will cause a re-render everytime function reference changes.
-And this is not a big deal in class components, because classes have **methods**, and method reference does not change. Of course, there is a `this` caveat, so one needs to either bind the method or use a (misleading) arrow syntax for methods instead of using anonymous functions because the latter changes reference as we have already seen above. That's something I've learned quite quickly, easy-peasy.
+And this is not a big deal in class components, because classes have **methods**, and method reference does not change. Of course, there is a `this` caveat, so one needs to either bind the method or use a (misleading) arrow syntax for methods instead of using anonymous functions because the latter changes reference as we have already seen above. 
+
+Anyway, that was something I've learned quite quickly, easy-peasy.
 
 Now, what about functional components? Functions don't have methods, but since v16.8 we have hooks, that should serve more or less the same purpose as methods (including those extended from `Component` class). In particular, there is a `useState`, which returns a handle to mutating callback function. The reference of this function doesn't change - cool, we are safe. But are we? Sometimes we want to encapsulate some logic that will decide *what* to save, instead of passing down the state and callback to the child component. And in such situations we have to create an anonymous function, thus, a new reference. But one might say now: that's fine, we have `useCallback` that is capable of memoizing a reference, by ignoring every change on a state value not defined as a dependency. 
 
-And that is true, but we might need this value in our callback, and in such case reference **will** change, sot the effect will remain the same: unnecessary renders.
+And that is true, but we might need this value in our callback, and in such case reference **will** change, so the effect will remain the same: unnecessary renders.
 
 But is this really a problem? A reference to a callback will change when the previous callback performs the state change that we are interested in, right? 
 Yes and no. In some situations, the prop that we need in a child component can be some sort of a derivate of our state, or even we might not need this state at all. In such cases, there is no need to re-render the child every time parent's state has changed, but we can't avoid it due to the limitation that I've pointed out.
 
-I guess it might be a little confusing at this point, so let's consider an example: there is a container (aka 'smart component') with a state, containing a 'dumb' component that uses some callback from its parent - container. 
+I guess it might be a little confusing at this point, so let's consider an example: there is a container (aka 'smart' component) with a state, containing a 'dumb' component that uses some callback from its parent - a container. 
 
 It may look like this:
 ```javascript
@@ -84,7 +86,7 @@ So what can we do about it? There are several techniques.
 
 If one wants to stick to the `useState` without introducing new stuff, then I know two workarounds that can be used. 
 
-The first one artificially keeps the prepends the callback reference
+The first one artificially prepends the callback reference
 
 ```javascript
 let currentIncreaseCallback = () => {
@@ -101,7 +103,7 @@ export function Container(_props) {
   // ...
 ```
 
-The second is similar - a container needs to refresh the current implementation of an increase function, but this time it is not even passed as a prop - it can be accessed if it's defined in the same scope
+The second one is similar - a container needs to refresh the current implementation of an increase function, but this time it is not even passed as a prop - it can be accessed if it's defined in the same scope
 
 ```javascript
 let currentIncreaseCallback = () => {
@@ -182,10 +184,10 @@ function Container(_props) {
   return <MemoizedComponent isUnder10={isUnder10} increase={increaseRef} />;
 }
 ```
-I guess it is due it's not entirely inline with [hook rules hooks](https://reactjs.org/docs/hooks-rules.html).
+I guess the reason is that it is not entirely inline with [hook rules hooks](https://reactjs.org/docs/hooks-rules.html).
 
 ## Conclusion
-I think that our winners are `useRef` + `useCallback` and the one with `useReducer`, though , I prefer the latter. 
+I think that our winners are `useRef` + `useCallback` and the one with `useReducer`, though, I prefer the latter. 
 
 And of course, all this fuss is about a **very** niche use case, where one wants to avoid **every** unnecessary render. But in such case it would likely be better to invest the time into a better tool for the job, like [solid.js](https://www.solidjs.com/) or [svelte](https://svelte.dev/). 
 
