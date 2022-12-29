@@ -1,14 +1,18 @@
 ---
-import type { MarkdownInstance } from "astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-const allPosts = await Astro.glob("../pages/posts/*.md");
-const selectPublishedAtTimestamp = (
-    post: MarkdownInstance<Record<string, any>>
-) => new Date(post.frontmatter.publishedAt).getTime();
+import {
+    isNotDraft,
+    selectPublishedAtTimestamp,
+} from "../layouts/post/postLayout";
 
-allPosts.sort(
-    (p1, p2) => selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1)
-);
+const allPosts = await Astro.glob("../pages/posts/*.md")
+    .then((posts) => posts.filter(isNotDraft))
+    .then((posts) =>
+        posts.sort(
+            (p1, p2) =>
+                selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1)
+        )
+    );
 ---
 
 <BaseLayout>
