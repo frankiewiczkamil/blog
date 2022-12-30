@@ -1,15 +1,39 @@
-html {
-    font-family: Verdana, sans-serif;
-    font-size: 20px;
+@font-face {
+    font-family: 'sansy';
+    src: url('/fonts/Oxygen-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'chosenOne';
+    font-family: 'standard';
+    font-weight: normal;
     src: url('/fonts/Lovato\ Regular.otf');
 }
 
-body {
-    font-family: chosenOne, Verdana, sans-serif;
+@font-face {
+    font-family: 'standard';
+    font-weight: bolder;
+    src: url('/fonts/Lovato\ Regular.otf');
+}
+
+@font-face {
+    font-family: 'standard';
+    font-weight: bold;
+    src: url('/fonts/Lovato\ Bold.otf');
+}
+
+html {
+    font-family: standard, sans-serif, Tahoma, Verdana;
+    font-size: 20px;
+}
+
+header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: sansy, Verdana, sans-serif;
 }
 
 a {
