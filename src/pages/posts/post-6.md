@@ -3,11 +3,12 @@ layout: ../../layouts/post/PostLayout.astro
 title: Avoiding reace conditions in REST APIs
 publishedAt: 2022-12-?
 # editedAt: 2022-12-?
-description: 
+description:
 author: kpf
 tags: ['race condition', 'rest']
-# image: 
+# image:
 #     url: /img/.jpg
 draft: true
 ---
+
 🚧

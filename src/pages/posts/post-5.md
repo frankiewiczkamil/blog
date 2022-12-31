@@ -3,11 +3,12 @@ layout: ../../layouts/post/PostLayout.astro
 title: Choreography vs orchestration (not only) in redux-saga
 publishedAt: 2022-12-?
 # editedAt: 2022-12-?
-description: 
+description:
 author: kpf
 tags: ['redux', 'redux-saga']
-# image: 
+# image:
 #     url: /img/.jpg
 draft: true
 ---
+
 🚧
