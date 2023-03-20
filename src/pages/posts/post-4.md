@@ -1,11 +1,11 @@
 ---
 layout: ../../layouts/post/PostLayout.astro
 title: Composable side effects
-publishedAt: 2023-03-19
-# editedAt: 2022-12-?
+publishedAt: '2023-03-19'
+editedAt: '2023-03-20'
 description:
 author: kpf
-tags: ['side effects', 'orchestrating', 'redux', 'redux-saga']
+tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga']
 # image:
 #     url: /img/.jpg
 draft: true
@@ -30,7 +30,7 @@ We have a sequence of side effects, where output of effect can be input for the 
 
 # Heuristics
 
-There are many reasons why we might consider our code as poorly designed and/or implemented, though I'd like to highlight two main classes of heuristics:
+There are many reasons why we might consider our code as poorly designed and/or implemented, though I'd like to highlight two main classes of heuristics that I see especially useful for rating our side effects orchestrators:
 
 - implementation abstraction level, aka single level of abstraction principle (SLAP) - abstraction level in each function should be consistent, no mixing low level stuff with higher level implementation
 - implementation reusability, aka don't repeat yourself (DRY)
@@ -205,7 +205,11 @@ function createOuter(nestedCoordinator: InAndOut) {
 const coordinator = createOuter(createMiddleCoordinator(sideEffect3));
 ```
 
-Moreover, if you are into fp and there are more functions that you need to extract and compose like this, then you can consider using also some helper operator to achieve a better readability with point free style. Here are some examples from popular libraries:
+This example shows also one more thing: our reusable factories can be treated at the same time as dependencies and as common templates - createMiddleCoordinator is a good example. It's sort of like a class that implements two interfaces, a duplex stream that can handle input and emit an output.
+
+### Tip
+
+If you are into fp and there are more functions that you need to extract and compose like this, then you can consider using also some helper operator to achieve a better readability with point free style. Here are some examples from popular libraries:
 
 ```typescript
 // lodash-fp flow
@@ -224,9 +228,10 @@ const coordinator2 = pipe(sideEffect3, createMiddleCoordinator, createOuter);
 
 # Summary
 
-We have learned that if we have many conditional statements in our side effects coordinators (orchestrators), then it's best to extract functions that represent less complicated flows. This helps keep the maintainable. Then, if we need to make our code more DRY we can:
+We have learned that if we have many conditional statements in our side effects coordinators (orchestrators), then it's best to extract functions that represent less complicated flows. This helps keep it maintainable. Then, if we need to make our code more DRY we can:
 
 - extract functions that gather a sequence of side effects
-- create factories (higher order functions) that we will be used to create functions from a template with placeholders for 'moving parts', by injecting the custom side effects' implementations
+- create factories (higher order functions) that will be used to create functions from a template with placeholders for 'moving parts', by injecting the custom side effects' implementations
 
-All the examples here are using async-await, but I have also used this techniques to organize side effects with redux-saga as well and it served me well.
+All the examples here are using async-await, but I have also used this techniques to organize side effects with redux-saga and it served me well.
+Moreover, I guess it might be also true and useful for some backend building blocks, like sagas, process managers and similar services that deal with orchestrating side effects.
