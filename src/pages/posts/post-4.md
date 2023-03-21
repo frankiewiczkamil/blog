@@ -6,9 +6,9 @@ editedAt: '2023-03-20'
 description:
 author: kpf
 tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga']
-# image:
-#     url: /img/.jpg
-draft: true
+image:
+  url: /img/gears.webp
+draft: false
 ---
 
 # Context
@@ -35,7 +35,7 @@ There are many reasons why we might consider our code as poorly designed and/or 
 - implementation abstraction level, aka single level of abstraction principle (SLAP) - abstraction level in each function should be consistent, no mixing low level stuff with higher level implementation
 - implementation reusability, aka don't repeat yourself (DRY)
 
-In this post I'll use only examples for DRY heuristics, because it's easier to present it in a synthetic form and techniques that we will use for redesigning and refactoring are more or less universal and can be applied for regardless the reason.
+In this post I'll use only examples for DRY heuristics, because it's easier to present it in a synthetic form and techniques that we will use for redesigning and refactoring are more or less universal and can be applied regardless the reason.
 
 # Techniques
 
@@ -105,7 +105,7 @@ async function coordinator() {
 Our example is simple, but I guess you already see or can imagine how complicated this approach may became when more and more features (conditionals!) will be added. So if I had to choose one of those I would rather pick the first one, less DRY approach.
 This is because I prefer to keep each scenario simple and clear, even if some parts are not as DRY as it could be. The reason for that is that this way it's much easier to read, _maintain_ and _extend_ the code, because we can focus on a specific use case. It helps avoiding the bugs while introducing changes 💚
 
-In fact using 'scenarios approach' is nothing new - in a nutshell it's a good old strategy pattern, a polymorphic behavior well known in OOP world.
+In fact using 'scenarios approach' is nothing new - in a nutshell it's a good, old strategy pattern, a polymorphic behavior well known in OOP world.
 
 But what about DRY then? Keeping the logic understandable is far more important than _some_ repeating code, though using polymorphism (use case oriented) approach doesn't mean that we can't have it. So let's talk about the techniques that we can use to achieve both things.
 
