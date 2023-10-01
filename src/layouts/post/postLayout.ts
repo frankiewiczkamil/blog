@@ -1,21 +1,18 @@
-import type { MarkdownInstance } from 'astro';
+import type { CollectionEntry } from 'astro:content';
 
-type DateInfo = { editedAt?: string; publishedAt?: string };
-type Post = MarkdownInstance<Record<string, any>>;
+type PostData = Post['data'];
+type Post = CollectionEntry<'blog'>;
+const selectJoiner = ({ publishedAt }: PostData): string => (publishedAt ? ', ' : '');
 
-const selectJoiner = ({ publishedAt }: DateInfo): string => (publishedAt ? ', ' : '');
+const selectEditedAtText = (frontmatter: PostData): string =>
+  frontmatter.editedAt ? `${selectJoiner(frontmatter)}edited ${frontmatter.editedAt.toLocaleDateString()}` : '';
 
-const selectEditedAtText = (frontmatter: DateInfo): string =>
-  frontmatter.editedAt ? `${selectJoiner(frontmatter)}edited ${frontmatter.editedAt.slice(0, 10)}` : '';
+const selectPublishedAtText = ({ publishedAt }: PostData): string => publishedAt?.toLocaleDateString() || '';
 
-const selectPublishedAtText = ({ publishedAt }: DateInfo): string => publishedAt?.slice(0, 10) || '';
+export const selectPostDate = (frontmatter: PostData): string => selectPublishedAtText(frontmatter) + selectEditedAtText(frontmatter);
 
-export const selectPostDate = (frontmatter: DateInfo): string =>
-  selectPublishedAtText(frontmatter) + selectEditedAtText(frontmatter);
+export const selectPublishedAtTimestamp = (post: Post) => new Date(post.data.publishedAt).getTime();
 
-export const selectPublishedAtTimestamp = (post: Post) => new Date(post.frontmatter.publishedAt).getTime();
+export const isNotDraft = (post: Post) => !post.data.draft;
 
-export const isNotDraft = (post: Post) => !post.frontmatter.draft;
-
-export const sortByPublishedAtDesc = (p1: Post, p2: Post) =>
-  selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1);
+export const sortByPublishedAtDesc = (p1: Post, p2: Post) => selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1);
