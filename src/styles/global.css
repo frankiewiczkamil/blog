@@ -67,6 +67,10 @@ a:focus {
     a:focus {
         text-decoration-color: #a1df63;
     }
+
+    header {
+        background-color: rgb(23, 23, 32);
+    }
 }
 
 @media (prefers-color-scheme: light) {
@@ -91,6 +95,10 @@ a:focus {
     a:focus {
         text-decoration-color: #0b7215;
     }
+
+    header {
+        background-color: rgb(232, 232, 203);
+    }
 }
 
 body {
@@ -99,7 +107,6 @@ body {
     min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
     margin: 0 auto;
     max-width: 120ch;
-    padding: 1rem;
 }
 
 * {
@@ -108,7 +115,9 @@ body {
 
 header {
     border-bottom: solid;
-    flex-shrink: 0;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
 }
 
 .wrapper {
