@@ -19,8 +19,12 @@ import '../styles/global.css';
     <ViewTransitions />
   </head>
   <body>
-    <Header />
-    <slot />
-    <Footer />
+    <div class="wrapper">
+      <Header />
+      <div class="content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
   </body>
 </html>

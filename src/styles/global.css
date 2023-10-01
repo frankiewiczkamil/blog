@@ -1,29 +1,29 @@
 @font-face {
-  font-family: 'sansy';
-  src: url('/fonts/Oxygen-Bold.ttf');
+    font-family: 'sansy';
+    src: url('/fonts/Oxygen-Bold.ttf');
 }
 
 @font-face {
-  font-family: 'standard';
-  font-weight: normal;
-  src: url('/fonts/Lovato\ Regular.otf');
+    font-family: 'standard';
+    font-weight: normal;
+    src: url('/fonts/Lovato\ Regular.otf');
 }
 
 @font-face {
-  font-family: 'standard';
-  font-weight: bolder;
-  src: url('/fonts/Lovato\ Regular.otf');
+    font-family: 'standard';
+    font-weight: bolder;
+    src: url('/fonts/Lovato\ Regular.otf');
 }
 
 @font-face {
-  font-family: 'standard';
-  font-weight: bold;
-  src: url('/fonts/Lovato\ Bold.otf');
+    font-family: 'standard';
+    font-weight: bold;
+    src: url('/fonts/Lovato\ Bold.otf');
 }
 
 html {
-  font-family: standard, sans-serif, Tahoma, Verdana;
-  font-size: 20px;
+    font-family: standard, sans-serif, Tahoma, Verdana;
+    font-size: 20px;
 }
 
 header,
@@ -33,78 +33,95 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: sansy, Verdana, sans-serif;
+    font-family: sansy, Verdana, sans-serif;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
-    color: rgb(232, 232, 203);
-    background-color: rgb(23, 23, 32);
-  }
+    body {
+        color: rgb(232, 232, 203);
+        background-color: rgb(23, 23, 32);
+    }
 
-  .dimmed {
-    color: rgb(178, 178, 149);
-  }
+    .dimmed {
+        color: rgb(178, 178, 149);
+    }
 
-  .border__dimmed {
-    border-color: rgb(178, 178, 149);
-  }
+    .border__dimmed {
+        border-color: rgb(178, 178, 149);
+    }
 
-  a {
-    color: #df6363;
-  }
+    a {
+        color: #df6363;
+    }
 
-  a:hover,
-  a:focus {
-    text-decoration-color: #a1df63;
-  }
+    a:hover,
+    a:focus {
+        text-decoration-color: #a1df63;
+    }
 }
 
 @media (prefers-color-scheme: light) {
-  body {
-    background-color: rgb(232, 232, 203);
-    color: rgb(23, 23, 32);
-  }
+    body {
+        background-color: rgb(232, 232, 203);
+        color: rgb(23, 23, 32);
+    }
 
-  .dimmed {
-    color: gray;
-  }
+    .dimmed {
+        color: gray;
+    }
 
-  .border__dimmed {
-    border-color: gray;
-  }
+    .border__dimmed {
+        border-color: gray;
+    }
 
-  a {
-    color: #72490b;
-  }
+    a {
+        color: #72490b;
+    }
 
-  a:hover,
-  a:focus {
-    text-decoration-color: #0b7215;
-  }
+    a:hover,
+    a:focus {
+        text-decoration-color: #0b7215;
+    }
 }
 
 body {
-  margin: 0 auto;
-  max-width: 120ch;
-  padding: 1rem;
-  /* width: 100%; */
-  /* line-height: 1.5; */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+    margin: 0 auto;
+    max-width: 120ch;
+    padding: 1rem;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 header {
-  border-bottom: solid;
+    border-bottom: solid;
+    flex-shrink: 0;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    flex-shrink: 0;
+    margin-top: auto;
 }
