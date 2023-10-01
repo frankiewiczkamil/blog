@@ -1,6 +1,7 @@
 ---
 import Header from '../components/header/Header.astro';
 import Footer from '../components/footer/Footer.astro';
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 ---
 
@@ -15,6 +16,7 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark light" />
     <title>bytd</title>
+    <ViewTransitions />
   </head>
   <body>
     <Header />

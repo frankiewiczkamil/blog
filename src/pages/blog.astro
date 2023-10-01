@@ -13,7 +13,11 @@ const allPosts = await getCollection('blog')
     {
       allPosts.map(post => (
         <li>
-          <a href={'/blog/' + post.slug}>{`${post.data.publishedAt.toLocaleDateString()} ${post.data.title}`}</a>
+          <a href={'/blog/' + post.slug}>
+            <span transition:name={'publishedAt_' + post.slug}> {post.data.publishedAt.toLocaleDateString()}</span>
+            &nbsp;
+            <span transition:name={'title_' + post.slug}> {post.data.title}</span>
+          </a>
         </li>
       ))
     }

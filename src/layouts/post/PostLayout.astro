@@ -2,16 +2,16 @@
 import BaseLayout from '../BaseLayout.astro';
 import './postLayout.css';
 import { selectPostDate } from './postLayout';
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
 ---
 
 <BaseLayout>
-  <p>
+  <p transition:name={'publishedAt_' + slug}>
     {selectPostDate(frontmatter)}
   </p>
-  <h1>{frontmatter.title}</h1>
+  <h1 transition:name={'title_' + slug}>{frontmatter.title}</h1>
   <div>
-    <img width="100%" src={frontmatter?.image?.url} alt={frontmatter?.image?.alt} />
+    <img width="100%" src={frontmatter?.image?.url} alt={frontmatter?.image?.alt} transition:name={'img_' + slug} />
   </div>
   <slot />
 </BaseLayout>

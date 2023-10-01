@@ -1,8 +1,17 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import { isNotDraft, selectPublishedAtTimestamp } from '../layouts/post/postLayout';
+import { getCollection } from 'astro:content';
+import PostTiles from '../components/latest/PostTiles.astro';
+
+const latestPosts = await getCollection('blog')
+  .then(posts => posts.filter(isNotDraft))
+  .then(posts => posts.sort((p1, p2) => selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1)))
+  .then(posts => posts.slice(0, 10));
 ---
 
 <BaseLayout>
-	<p>Hello, stranger</p>
-	<div>🚧 Coming soon...</div>
+  <h2>Latest posts</h2>
+  <PostTiles posts={latestPosts} />
 </BaseLayout>
