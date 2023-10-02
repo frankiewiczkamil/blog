@@ -13,5 +13,7 @@ const { frontmatter, slug } = Astro.props;
   <div>
     <img width="100%" src={frontmatter?.image?.url} alt={frontmatter?.image?.alt} transition:name={'img_' + slug} />
   </div>
-  <slot />
+  <div class="post">
+    <slot />
+  </div>
 </BaseLayout>
