@@ -12,6 +12,8 @@ const latestPosts = await getCollection('blog')
 ---
 
 <BaseLayout>
-  <h2>Latest posts</h2>
-  <PostTiles posts={latestPosts} />
+  <section>
+    <h2>Latest posts</h2>
+    <PostTiles posts={latestPosts} />
+  </section>
 </BaseLayout>

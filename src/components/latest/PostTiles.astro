@@ -7,7 +7,7 @@ console.log(posts.map(p => p.data.image.placeholder));
 <div class="tiles-container">
   {
     posts.map(post => (
-      <div class="tile">
+      <article class="tile">
         <a href={'/blog/' + post.slug}>
           <div class="tile__picture-container" style={`background-image: url(${post.data.image.placeholder})`}>
             <img class="tile__picture" src={post.data.image.url} transition:name={'img_' + post.slug} loading="lazy" />
@@ -20,7 +20,7 @@ console.log(posts.map(p => p.data.image.placeholder));
         <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
           {post.data.publishedAt.toLocaleDateString()}
         </span>
-      </div>
+      </article>
     ))
   }
 </div>

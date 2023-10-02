@@ -9,3 +9,12 @@ img {
 .post {
     line-height: 1.2em;
 }
+
+.meta__timestamp {
+    padding-top: 0.2em;
+    float: right;
+}
+
+.meta__title {
+    clear: right;
+}
