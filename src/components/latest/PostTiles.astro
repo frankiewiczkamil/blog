@@ -1,6 +1,7 @@
 ---
 import './PostTiles.css';
 const { posts } = Astro.props;
+console.log(posts.map(p => p.data.image.placeholder));
 ---
 
 <div class="tiles-container">
@@ -8,8 +9,8 @@ const { posts } = Astro.props;
     posts.map(post => (
       <div class="tile">
         <a href={'/blog/' + post.slug}>
-          <div class="tile__preview-container">
-            <img class="tile__preview" src={post.data.image.url} transition:name={'img_' + post.slug} loading="lazy" />
+          <div class="tile__picture-container" style={`background-image: url(${post.data.image.placeholder})`}>
+            <img class="tile__picture" src={post.data.image.url} transition:name={'img_' + post.slug} loading="lazy" />
             <div class="tile__title" transition:name={'title_' + post.slug}>
               {post.data.title}
             </div>

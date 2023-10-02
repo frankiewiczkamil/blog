@@ -7,6 +7,7 @@ author: 'kpf'
 tags: [ 'personal', 'blogging', 'lurker' ]
 image:
   url: /img/avenue.webp
+  placeholder: /img/avenue-placeholder.webp
   alt: 🧳🧳🧳
 ---
 

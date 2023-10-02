@@ -12,7 +12,7 @@
     box-sizing: border-box;
 }
 
-.tile__preview {
+.tile__picture {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -75,12 +75,13 @@
     }
 }
 
-.tile__preview-container {
+.tile__picture-container {
     position: relative;
     display: inline-block;
-    max-width: 100%;
-    max-height: 10em;
+    width: 100%;
+    height: 10em;
     overflow: hidden;
+    background-size: cover;
 }
 
 .tile__title {

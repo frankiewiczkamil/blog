@@ -12,6 +12,7 @@ const postsCollection = defineCollection({
       .object({
         url: z.string(),
         alt: z.string(),
+        placeholder: z.string(),
       })
       .optional(),
     tags: z.array(z.string()),

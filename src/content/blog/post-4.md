@@ -7,6 +7,7 @@ author: kpf
 tags: [ 'side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga' ]
 image:
   url: /img/gears.webp
+  placeholder: /img/gears-placeholder.webp
   alt: ⚙️⚙️⚙️
 draft: false
 ---

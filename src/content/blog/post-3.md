@@ -7,6 +7,7 @@ author: kpf
 tags: [ 'redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state' ]
 image:
   url: /img/runes.webp
+  placeholder: /img/runes-placeholder.webp
   alt: ᛋᚬᚷᚨ
 draft: false
 ---
