@@ -32,7 +32,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.title {
     font-family: sansy, Verdana, sans-serif;
 }
 
@@ -43,6 +44,10 @@ a {
 a:hover,
 a:focus {
     text-decoration: underline;
+}
+
+a {
+    color: #df6363;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,10 +62,6 @@ a:focus {
 
     .border__dimmed {
         border-color: rgb(178, 178, 149);
-    }
-
-    a {
-        color: #df6363;
     }
 
     a:hover,
@@ -85,10 +86,6 @@ a:focus {
 
     .border__dimmed {
         border-color: gray;
-    }
-
-    a {
-        color: #72490b;
     }
 
     a:hover,
