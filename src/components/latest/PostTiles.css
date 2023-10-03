@@ -17,6 +17,7 @@
     height: 10em;
     object-fit: cover;
     object-position: center;
+    opacity: 0;
 }
 
 .tile__picture-container {
@@ -27,6 +28,16 @@
     overflow: hidden;
     background-size: cover;
     background-position: center;
+}
+
+
+.tile__picture--loaded {
+    opacity: 1;
+}
+
+.tile__picture--loaded-with-animation {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
 }
 
 

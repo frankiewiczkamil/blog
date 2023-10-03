@@ -5,6 +5,24 @@ console.log(posts.map(p => p.data.image.placeholder));
 ---
 
 <div class="tiles-container">
+  <script>
+    // console.log('GO');
+    // TODO there is a problem when navigating to this view for the SECOND time, as this script is not triggered then
+    const blurryPictureWrappers = document.getElementsByClassName('tile__picture-container');
+    for (let item of blurryPictureWrappers) {
+      const picture = item.querySelector('img');
+
+      function loaded() {
+        picture.classList.add('tile__picture--loaded-with-animation');
+      }
+
+      if (picture.complete) {
+        loaded();
+      } else {
+        picture.addEventListener('load', loaded);
+      }
+    }
+  </script>
   {
     posts.map(post => (
       <article class="tile">
