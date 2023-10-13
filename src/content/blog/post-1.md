@@ -6,8 +6,7 @@ description: "The first one - who am I, what I'll do here, why and why so late"
 author: 'kpf'
 tags: [ 'personal', 'blogging', 'lurker' ]
 image:
-  url: /img/avenue.webp
-  placeholder: /img/avenue-placeholder.webp
+  url: avenue
   alt: 🧳🧳🧳
 ---
 

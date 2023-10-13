@@ -5,8 +5,9 @@ publishedAt: 2023-12-31
 description: 'A handful of tips on how to avoid a common pitfall in REST APIs: race conditions'
 author: kpf
 tags: [ 'race condition', 'rest', 'etag' ]
-# image:
-#     url: /img/.jpg
+image:
+  url: avenue
+  alt: 🚧
 draft: true
 ---
 

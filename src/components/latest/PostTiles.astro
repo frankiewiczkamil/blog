@@ -1,26 +1,38 @@
 ---
 import './PostTiles.css';
 const { posts } = Astro.props;
-console.log(posts.map(p => p.data.image.placeholder));
+import { getImage, Picture } from 'astro:assets';
 ---
 
 <div class="tiles-container">
   {
-    posts.map(post => (
-      <article class="tile">
-        <a class="tile__link-container" href={'/blog/' + post.slug}>
-          <div class="tile__picture-container" style={`background-image: url(${post.data.image.placeholder})`}>
-            <img class="tile__picture" src={post.data.image.url} transition:name={'img_' + post.slug} loading="lazy" />
-            <div class="tile__title title" transition:name={'title_' + post.slug}>
-              {post.data.title}
+    posts.map(async post => {
+      const src = (await import(`../../pictures/${post.data.image.url}.jpg`)).default;
+      const placeholder = await getImage({ src, format: 'avif', width: 40 });
+      return (
+        <article class="tile">
+          <a class="tile__link-container" href={'/blog/' + post.slug}>
+            <div class="tile__picture-container" style={`background-image: url(${placeholder.src})`}>
+              <Picture
+                decoding="sync"
+                class="tile__picture"
+                src={src}
+                formats={['avif', 'webp', 'jpg']}
+                alt={post.data.image.alt}
+                width="640"
+                transition:name={'img_' + post.slug}
+              />
+              <div class="tile__title title" transition:name={'title_' + post.slug}>
+                {post.data.title}
+              </div>
             </div>
-          </div>
-          <div class="tile__description">{post.data.description}</div>
-          <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
-            {post.data.publishedAt.toLocaleDateString()}
-          </span>
-        </a>
-      </article>
-    ))
+            <div class="tile__description">{post.data.description}</div>
+            <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
+              {post.data.publishedAt.toLocaleDateString()}
+            </span>
+          </a>
+        </article>
+      );
+    })
   }
 </div>

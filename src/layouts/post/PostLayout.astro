@@ -2,7 +2,9 @@
 import BaseLayout from '../BaseLayout.astro';
 import './postLayout.css';
 import { selectPostDate } from './postLayout';
+import { Picture } from 'astro:assets';
 const { frontmatter, slug } = Astro.props;
+const src = (await import(`../../pictures/${frontmatter.image.url}.jpg`)).default;
 ---
 
 <BaseLayout>
@@ -13,7 +15,15 @@ const { frontmatter, slug } = Astro.props;
   <h1 class="meta__title" transition:name={'title_' + slug}>{frontmatter.title}</h1>
 
   <div>
-    <img width="100%" src={frontmatter?.image?.url} alt={frontmatter?.image?.alt} transition:name={'img_' + slug} />
+    <Picture
+      decoding="sync"
+      class="tile__picture"
+      src={src}
+      formats={['avif', 'webp', 'jpg']}
+      alt={frontmatter.image.alt}
+      width="1280"
+      transition:name={'img_' + slug}
+    />
   </div>
 
   <article class="post">

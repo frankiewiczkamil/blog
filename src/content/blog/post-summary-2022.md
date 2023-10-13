@@ -6,8 +6,7 @@ description: 'An overview of 2022 from my technical standpoint, encompassing gro
 author: kpf
 tags: [ summary, '2022', '2023', plans ]
 image:
-  url: /img/fireworks.webp
-  placeholder: /img/fireworks-placeholder.webp
+  url: fireworks
   alt: 🍾🍾🍾
 draft: false
 ---

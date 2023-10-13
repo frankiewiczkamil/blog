@@ -7,8 +7,7 @@ author: kpf
 tags:
   [ 'functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react' ]
 image:
-  url: /img/rocket-launch.webp
-  placeholder: /img/rocket-launch-placeholder.webp
+  url: rocket-launch
   alt: 🚀 🚀 🚀
 ---
 

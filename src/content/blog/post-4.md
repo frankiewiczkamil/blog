@@ -6,8 +6,7 @@ description: 'Exploring the art of side effects handling: navigating trade-offs 
 author: kpf
 tags: [ 'side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga' ]
 image:
-  url: /img/gears.webp
-  placeholder: /img/gears-placeholder.webp
+  url: gears
   alt: ⚙️⚙️⚙️
 draft: false
 ---

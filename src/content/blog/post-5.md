@@ -5,8 +5,9 @@ publishedAt: 2023-12-31
 description: ''
 author: kpf
 tags: [ 'redux', 'redux-saga' ]
-# image:
-#     url: /img/.jpg
+image:
+  url: avenue
+  alt: 🚧
 draft: true
 ---
 

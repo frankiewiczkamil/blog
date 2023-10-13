@@ -6,8 +6,7 @@ description: State management solutions landscape in 2023 and how does it affect
 author: kpf
 tags: [ 'redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state' ]
 image:
-  url: /img/runes.webp
-  placeholder: /img/runes-placeholder.webp
+  url: runes
   alt: ᛋᚬᚷᚨ
 draft: false
 ---
