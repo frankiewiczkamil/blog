@@ -25,7 +25,6 @@ const postz = await Promise.all(
         <a class="tile__link-container" href={'/blog/' + post.slug}>
           <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
             <Picture
-              decoding="sync"
               class="tile__picture"
               src={post.picture.src}
               formats={['avif', 'webp', 'jpg']}
