@@ -4,7 +4,7 @@ publishedAt: 2023-12-16
 # editedAt: 2022-12-?
 description: 'Next 13+: evolution or revolution?'
 author: kpf
-tags: [ 'ssr', 'server side rendering' 'next.js', 'next', 'react' ]
+tags: [ 'ssr', 'server side rendering', 'next.js', 'next', 'react' ]
 image:
   url: avenue
   alt: 🚧
