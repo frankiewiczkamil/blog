@@ -80,19 +80,20 @@ It was like the box decoupled from its content
 
 Also, we were able to share same endpoints between different clients, like mobile apps, web apps, etc.
 
-Moreover, there was also that tempting promise, that frontend devs and backend devs can work independently.
+And finally, there was also that tempting promise, that frontend devs and backend devs can work independently.
 Well, maybe, but...
 
-It was finally causing a weird situation,
+It was causing a weird situation,
 where we were using almost the same model/dto for backend and frontend.
-Responsibilities were unclear, there was often too much logic leaking to the frontend layer.
+There was too much logic leaking to the frontend layer, and responsibilities were unclear.
 And one might say: whatever, that's what we do 95% of our time - simple, CRUD apps.
 I get it, but even so, what about those 5%?
-From my experience we tend to using a hammer for everything, if it's already in our hand.
-So in more complicated scenarios I've been experiencing (and even committing myself 😳)
-the consequences of this mindset, and we were ending up with
-[anemic models](https://en.wikipedia.org/wiki/Anemic_domain_model) on backend side and leaking logic
-(or even worse: inconsistent logic).
+From my experience we tend to use a hammer for everything, if it's already in our hand.
+I've done it this way myself as well.
+Thus, we were ending up with
+[anemic models](https://en.wikipedia.org/wiki/Anemic_domain_model) on backend side and a lot of logic implemented in
+frontend.
+Sometimes it was not even consistent.
 But I'm getting ahead of myself here - we will get back to this later.
 
 Anyway, overall people seemed happy about the SPA approach,
@@ -115,30 +116,29 @@ So we still have a cascade of requests that can't be avoided.
 I suppose, that business people were very unhappy about that, especially in e-commerce world.
 And they had a good argument here -
 what happened, so that we ended up with a worse user experience than we had in the past?
-Like I've already stated, everyone can spot the difference in terms page loading speed.
+Like I've already stated, everyone can spot the difference in terms of site's loading speed.
 
 There are also some other issues and limitations with SPAs, like SEO, but I won't go into details here.
-I'll focus on the performance aspect, as I think that it caused the need for change.
 
 # Homogeneous apps
 
-At this point we already know, that we needed apps to load faster.
-But on the other hand, we also wanted the interactivity from SPAs.
+At this point we already know, that we needed apps to load faster than SPAs.
+But on the other hand, we also wanted the interactivity.
 In other words, we aimed to have the best of both worlds:
 
 - the speed of first contentful page from SSR/SSG, but also,
 - minimal latency for loading more data from CSR
 
 That's why we re-discovered the mixed approach: SSR+CSR.
-What differentiates homogeneous apps from earlier solutions is,
-that backend and frontend can reuse the implementation as needed,
+What differentiates homogeneous apps from earlier solutions is seamless integration of SSR and CSR parts.
+Backend and frontend can share the implementation as needed,
 because we have the same language on both sides.
 
-I suppose that it was very important from DX perspective,
+It was very important from DX perspective for sure,
 though at the end of the day users care about the result,
 and that's why I claim that it was the performance that forced us re-think SPAs (over)usage.
 
-In homogeneous apps we can use SSR/SSG to obtain meaningful content faster,
+In homogeneous apps we can use SSR/SSG to obtain something meaningful faster,
 while still being able to load more data later,
 using REST API like we did in SPAs.
 Alternatively, we can load another page using SSR/SSG again.
@@ -146,10 +146,10 @@ Alternatively, we can load another page using SSR/SSG again.
 Did we reach a perfect solution in such case?
 Of course not.
 
-First of all, we encountered a technical debt.
+First of all, we encountered a sort of technical debt.
 In order to show something meaningful to the user quickly,
 we pre-render html on the server side,
-but then on the client side we need to tell somehow react to take over the control.
+but then on the client side we need to tell react (or other library) somehow to take over the control.
 
 It's called
 [hydration](https://en.wikipedia.org/wiki/Hydration_(web_development)).
@@ -158,7 +158,7 @@ And there is a gap between the moment when html is rendered and visible,
 and the moment when interactive stuff is loaded (listeners are attached etc).
 
 Secondly, if you think about it, handling loading more data using CSR is slightly inefficient at it's core,
-as **every** client has to transform the data from JSON to the state and render it.
+as **every** client has to transform the data from JSON to the state and then render it.
 
 ## Elephant in the room - RSC, Suspense and streaming components
 
@@ -171,36 +171,50 @@ But what if I told you,
 that we can become faster (and get rid of hydration inefficiencies)
 by slightly changing our mindset?
 
-The idea here is using React Server Components (RSC) -
-truly server side components that can be streamed to the client.
+The idea here is using components' streaming, which is possible with React Server Components (RSC).
+So RSC are components that are truly server-side.
+They can be nested inside other server side components,
+or inside client components,
+and be streamed to the client lazily and/or on-demand.
 
-The way to achieve that is to embed the server component inside a client component.
-There is a small nuance here, as server streams the data as `text/x-component` which is neither HTML nor JSON,
-as this component might contain another components inside.
-But it's definitely a step towards a classical, HTML direction,
-as the server takes care of preparing html tags that are ready to be used by the client,
+So if we have a page that has been already loaded,
+but we want to get some more data,
+or change some data in place without changing the path/route,
+we can now do it by wrapping a server component with `Suspense` and using inside the client component,
+and the necessary HTML metadata will be streamed to the client, ready to be used by the react.
+
+There is a small nuance here TBH - server streams the data as `text/x-component` which is neither HTML nor JSON.
+But it's definitely a step towards a classical, HTML-SSR direction,
+as the server takes care of preparing HTML tags that are ready to be used by the client,
 instead of sending raw data that needs to be transformed into the state just like in REST requests.
 
-And you know what?
-It's not only about the dynamic parts.
+So that was about the interactive parts
+But there is more.
 Consider this: requested page usually consists of some content that is basically static,
-but also some more dynamic content that needs to be fetched from some resource(s), APIs etc.
+but also some content that needs to be fetched from some other resources like DBs, APIs etc.
 There might be many things to fetch,
-and they may vary in terms of latency.
+and they may vary in terms of the latency.
 
 As a result, the requested page is as slow as the slowest piece.
 
 But in Next v13+ it doesn't have to be that way.
 
-The idea is, that the server-specific part of the page might be rendered in chunks as well,
-so client receives 'fast pieces' first,
-and 'slower pieces' will arrive eventually later. One just needs to wrap each component with `Suspense`.
-It reduces the need for cascade of requests and in fact it's easier to reason about.
+The idea is, that the requested page might be rendered in chunks as well,
+so client receives 'fast pieces' first (and those are already interactive),
+and 'slower pieces' will arrive eventually later.
+One just needs to remember about wrapping each component with `Suspense`.
+It reduces the need for cascade of requests and might be easier to reason about.
+
+The interesting part for this use case is that it's not using another request with `text/x-component` as a data format,
+but rather it takes advantage of the fact,
+that the browser can render HTML even if the whole document is not yet fetched.
+You can take a look at `Transfer-Encoding` header, and you will see that it's `chunked`.
 
 Brilliant, isn't it?
 And like I told in the beginning: not a brand-new idea, but it's not reinventing PHP either.
 If you want to check my super simple examples for streaming components,
 then you can find it [here](https://github.com/frankiewiczkamil/next-exercises).
+It covers both scenarios that I've mentioned above.
 
 That was the fetching part, but what about sending then?
 Well, it's again re-discovering something old, but with some extra sauce.
@@ -209,7 +223,7 @@ Again: abandoning REST+JSON and going back to the roots of the web, but also add
 
 Personally I'm happy that we finally reached this point,
 where we were able to see a bigger picture,
-fill the gaps and re-use some old ideas instead of creating some new,
+fill the gaps, and re-use some old ideas instead of creating some new,
 hype-driven solution, focused on particular use case.
 
 Of course, in next v13+ one is still able to do things like in post-SPA era -
@@ -259,7 +273,7 @@ which - in a nutshell - says that crisis is an opportunity.
 
 And I think it's true here.
 We have an opportunity to re-think how we organize our business logic implementation in node.js apps.
-I think, that actions as an **another** entry point is a great opportunity to re-think architecture for people,
+I think, that actions as **another** entry point is a great opportunity to re-think architecture for people,
 who used to have only one entry point before - REST API.
 
 There are plenty of options here, depending on one's preferences and needs.
@@ -275,21 +289,22 @@ I think that next v13+ is a big step forward.
 Not because of the new features or API changes,
 but rather because it fills the gaps in the existing ecosystem.
 
-It also have a potential to change the way we think about web apps architecture,
+It also has a potential to change the way we think about web apps architecture,
 and I hope this trend will be adopted by other frameworks as well.
 
-And to be honest, I know that this idea is already present in other frameworks,
-like [hotwire](https://hotwired.dev/) and [liveview](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html)
+And to be honest, I know that this, or a similar idea is already present in other frameworks,
+like [hotwire](https://hotwired.dev/) and [liveview](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html),
 but I think that next.js is the first one that brings it to the mainstream.
-Moreover, it does it from a different angle, as hotwire and liveview are ruby and elixir based, respectively.
+Moreover, it does it from a different angle, as hotwire and liveview are ruby and elixir based,
+respectively, and it has some technical implications in terms of achieving seamless experience.
 
-In fact those frameworks that I mentioned,
+What is more, those frameworks that I've just mentioned,
 together with [island architecture](https://docs.astro.build/en/concepts/islands/)
 ([astro](https://docs.astro.build/), [fresh](https://fresh.deno.dev/)),
 [qwik](https://qwik.builder.io/)
 and [solid start](https://start.solidjs.com/getting-started/what-is-solidstart)
 are to me like a new trend in web development.
-I see it as an attempt, to make our tools well suited to our needs, sharper and fine-grained.
+I see it as an attempt, to make our tools well suited to our needs: sharper and finer-grained.
 I think that it's a good direction, and I'm looking forward to see how it will evolve.
 
 Thank you for reading, and see you next time 🖖
