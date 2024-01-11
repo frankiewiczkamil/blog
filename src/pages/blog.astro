@@ -1,25 +1,15 @@
 ---
-import { isNotDraft, selectPublishedAtTimestamp } from '../layouts/post/postLayout';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { toComponentFormat } from '../posts';
+import PostList from '../components/PostList.astro';
 
-const allPosts = await getCollection('blog')
-  .then(posts => posts.filter(isNotDraft))
-  .then(posts => posts.sort((p1, p2) => selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1)));
+const allPosts = await getCollection('blog').then(toComponentFormat);
 ---
 
 <BaseLayout>
-  <ul>
-    {
-      allPosts.map(post => (
-        <li>
-          <a href={'/blog/' + post.slug}>
-            <span transition:name={'publishedAt_' + post.slug}> {post.data.publishedAt.toLocaleDateString()}</span>
-            &nbsp;
-            <span transition:name={'title_' + post.slug}> {post.data.title}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <section>
+    <h2>All posts</h2>
+    <PostList posts={allPosts} />
+  </section>
 </BaseLayout>

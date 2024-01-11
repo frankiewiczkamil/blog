@@ -21,4 +21,5 @@ const postsCollection = defineCollection({
 
 export const collections = {
   blog: postsCollection,
+  blog_pl: postsCollection,
 };

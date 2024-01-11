@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { toComponentFormat } from '../../posts';
+import PostList from '../../components/PostList.astro';
+
+const allPosts = await getCollection('blog_pl').then(toComponentFormat);
+---
+
+<BaseLayout>
+  <section>
+    <h2>Wszystkie posty</h2>
+    <PostList posts={allPosts} />
+  </section>
+</BaseLayout>

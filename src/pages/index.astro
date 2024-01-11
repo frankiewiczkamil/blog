@@ -1,14 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import { isNotDraft, selectPublishedAtTimestamp } from '../layouts/post/postLayout';
 import { getCollection } from 'astro:content';
 import PostTiles from '../components/latest/PostTiles.astro';
+import { toComponentFormat } from '../posts';
 
-const latestPosts = await getCollection('blog')
-  .then(posts => posts.filter(isNotDraft))
-  .then(posts => posts.sort((p1, p2) => selectPublishedAtTimestamp(p2) - selectPublishedAtTimestamp(p1)))
-  .then(posts => posts.slice(0, 10));
+const latestPosts = await getCollection('blog').then(toComponentFormat);
 ---
 
 <BaseLayout>

@@ -1,9 +1,11 @@
 ---
-import "./navigation.css";
+import './navigation.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const { title } = Astro.props;
 ---
 
 <div class="nav-links">
-    <a href="/">Home</a>·
-    <a href="/blog">Blog</a>·
-    <a href="/about/">About</a>
+  <a href={getRelativeLocaleUrl(Astro.currentLocale, '')}>Home</a>·
+  <a href={getRelativeLocaleUrl(Astro.currentLocale, 'blog')}>Blog</a>·
+  <a href={getRelativeLocaleUrl(Astro.currentLocale, 'about')}>About</a>
 </div>

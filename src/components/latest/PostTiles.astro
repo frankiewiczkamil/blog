@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import './PostTiles.css';
 const { posts } = Astro.props;
 import { getImage, Picture } from 'astro:assets';
@@ -22,7 +23,7 @@ const postz = await Promise.all(
   {
     postz.map(post => (
       <article class="tile">
-        <a class="tile__link-container" href={'/blog/' + post.slug}>
+        <a class="tile__link-container" href={getRelativeLocaleUrl(Astro.currentLocale, `/blog/${post.slug}`)}>
           <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
             <Picture
               class="tile__picture"

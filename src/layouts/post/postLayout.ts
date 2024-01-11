@@ -1,7 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 type PostData = Post['data'];
-type Post = CollectionEntry<'blog'>;
+type Post = CollectionEntry<'blog' | 'blog_pl'>;
 const selectJoiner = ({ publishedAt }: PostData): string => (publishedAt ? ', ' : '');
 
 const selectEditedAtText = (frontmatter: PostData): string =>

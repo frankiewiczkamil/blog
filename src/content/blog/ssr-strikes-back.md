@@ -1,7 +1,7 @@
 ---
 title: 'Next v13: SSR strikes back'
 publishedAt: 2023-12-16
-# editedAt: 2022-12-?
+editedAt: 2022-12-20
 description: 'Next 13+: evolution or revolution?'
 author: kpf
 tags: [ 'SWR', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG' ]

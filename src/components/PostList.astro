@@ -1,0 +1,19 @@
+---
+import './latest/PostTiles.css';
+const { posts } = Astro.props;
+import { getRelativeLocaleUrl } from 'astro:i18n';
+---
+
+<ul>
+  {
+    posts.map(post => (
+      <li>
+        <a href={getRelativeLocaleUrl(Astro.currentLocale, `/blog/${post.slug}`)}>
+          <span transition:name={'publishedAt_' + post.slug}> {post.data.publishedAt.toLocaleDateString()}</span>
+          &nbsp;
+          <span transition:name={'title_' + post.slug}> {post.data.title}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
