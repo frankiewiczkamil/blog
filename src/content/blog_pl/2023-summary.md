@@ -40,7 +40,6 @@ W związku z tym, postanowiłem swoje cele techniczne lekko dostosować do nowej
 
 Szczęśliwie dla mnie, najmniej pragmatyczny cel jakim było rozpoznanie świata Clojure/Lisp,
 realizowałem wcześniej - latem.
-Wprawdzie miałem do tego tematu wrócić, ale minimum uważam za zaliczone.
 W szczególności interesował mnie obszar concurrency i różnice między modelem aktorów a klożurowym modelem agentów.
 Koncepty na pierwszy rzut oka wydają się bardzo podobne, ale w praktyce są dość różne.
 Moją uwagę zwróciły również niemutowalne struktury danych, które są _wbudowane_ w Clojure.
@@ -48,15 +47,15 @@ Pod maską jest magia sprawiająca, że jest to (podobno) super wydajne,
 ale nie potrafię ocenić,
 na ile jest to lepsze (jeśli w ogóle) w porównaniu do rozwiązań w rodzaju vavr czy immutable.js.
 Podsumowując: temat zawieszony, chętnie do niego wrócę, ale nie jest to priorytet.
+Minimum uważam za zaliczone.
 
 Innym celem na 2023 było zapoznanie się z nowinkami w świecie SSR, zaprezentowanymi w nowej wersji next.js.
 Sytuacja była o tyle niestandardowa,
 że nie pisałem wcześniej w next.js - znałem jedynie teorię.
-Sam fakt istnienia dwóch linii next.js był jednak dla mnie wręcz pomocny,
-bo łatwiej mi zrozumieć coś porównując to do czegoś innego.
 Tu warto dodać, że next 13 potrafi działać z dwiema konfiguracjami routingu:
-zarówno z nowym app (v13+)
-jak i klasycznym pages (<=v12).
+zarówno z nowym app (v13+) jak i klasycznym pages (<=v12).
+Ta sytuacja paradoksalnie była dla mnie wręcz pomocna,
+bo łatwiej mi zrozumieć coś porównując to do czegoś innego.
 
 W każdym razie, na nexta poświęciłem nieco więcej czasu -
 poza samym rozpoznaniem
