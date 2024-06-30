@@ -1,1 +1,1 @@
-My blog project, temporarily hosted [here](https://bytd.netlify.app/)
+My blog project, hosted [here](https://bytd.dev) and [here](https://bytd.netlify.app/)
