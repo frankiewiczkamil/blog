@@ -1,25 +1,26 @@
 ---
 title: 'Limitations of next.js SSR'
 publishedAt: 2024-06-27
+editedAt: 2024-07-03
 description: 'Components interleaving limitations'
 author: kpf
-tags: [ 'components mixing', 'components interleaving', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering' ]
+tags: [ 'component streaming','components mixing', 'components interleaving', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering' ]
 image:
   url: layered-cake
-  alt: 🚧
+  alt: 🍰
 draft: false
 ---
 
 
 The 13th generation of next was advertised as an ultimate solution,
-that among other things will make it possible to mix client and server components.
+that among other things will make it possible to mix client and server components freely.
 I've tried it and even described my experience in
 [this article](../../../blog/ssr-strikes-back/) from December 2023.
 At that point, I've noticed that there are some strange warnings,
 but I didn't pay attention, as it seemed like some minor issues to me.
 However, when I tried it again in a commercial project,
 I've found out, that the warning is quite important,
-as it says that I'm attempting to do something that is not supported.
+as it says that I'm attempting to do something that is *not supported*.
 
 Here's an example of such a warning:
 
@@ -66,12 +67,13 @@ There's already a topic for that
 [at reddit](https://www.reddit.com/r/nextjs/comments/18qdk4s/how_to_pass_props_from_client_component_to_server/),
 and it seems that majority agrees on using API instead, just like for SPAs.
 You can of course use next's actions as well,
-but it's an API meant for mutations, so for me it seems even worse.
-And it's still not a component streaming.
+but it's an API meant for mutations, so for me, it seems even worse.
 
-But the point is, that I feel slightly disappointed.
-I was hoping for experience similar to Hotwire and LiveView,
-so we can receive prerendered component from a server.
+So I feel slightly disappointed,
+as I was hoping for experience similar to Hotwire and LiveView,
+so as a part of the famous *component streaming* feature
+I would be able to get a prerendered component from a server on a client side,
+instead of calling API and doing all the dance.
 
 So is it all lost?
 Actually, I'm not so sure.
@@ -81,8 +83,10 @@ I've already mentioned, that there's a warning, but still the thing *works*.
 Moreover, I spent some time and managed to get rid of the warnings,
 and also some other issues that I haven't mentioned here.
 You can find the code [here](https://github.com/frankiewiczkamil/next-exercises/blob/main/app/clientWrapper.tsx).
-I'm totally aware that it's ugly, but the point is that it works,
+I'm totally aware that it's ugly, just like any other workaround, but the point is that it still works,
 which makes me think that maybe it *will* be officially supported at some point in the future.
 
 So I keep my fingers crossed,
-so we can push the boundaries and write the code that suits as best. Cheers 🖖
+so we can push the boundaries and write the code in a way that suits as best.
+
+Cheers 🖖
