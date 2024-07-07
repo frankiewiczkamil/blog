@@ -245,8 +245,8 @@ I suppose that we might call it reducing the accidental, technical complexity th
 I think that for write operations, it's even more about DX, and this is due the new feature called **actions**.
 So with actions we are not using REST as well,
 but rather we reuse an established technique, which is submittable forms.
-Actually, one doesn't even have to use a form, as actions exist in two flavors,
-but the big idea of submitting the data to the very same endpoint (like with forms) remains.
+Actually, one doesn't even have to use a form, as actions exist in two flavors — with or without forms —
+but the big idea of submitting the data to current URL (like with forms) remains.
 One might think now:
 I see no benefit out of it at this point,
 so why would I even want to abandon my beloved REST endpoints for some ancient pattern?
@@ -256,15 +256,15 @@ Yeah, sort of like RPC. So this is exactly what actions give you.
 
 ## Reflections
 
-Personally I'm happy that we finally reached this point,
+Of course, in next v13+ one is still able to do things in SPA way,
+like using REST APIs for reads and writes,
+but new features seem simpler and more efficient,
+so looks like a good defaults set.
+
+I'm happy that we finally reached this point,
 where we were able to see a bigger picture,
 fill the gaps, and reuse some old ideas instead of creating some new,
 hype-driven solution, focused on one, particular use case.
-
-Of course, in next v13+ one is still able to do things like in post-SPA era —
-using REST APIs for fetching and sending data,
-but the new features seem simpler and more efficient,
-so looks like a good defaults set.
 
 ### Challenges
 
@@ -282,12 +282,12 @@ especially in the context of
 that became a viral.
 Many people joked about it, many memes were created,
 but most of them were missing the point — it was showing the feature in the simplest possible form.
-So jokes regarding bad architecture (calling DB directly in upper layer) were unfair.
-Moreover, jokes about SQL injection were just ignorant,
+So jokes regarding bad architecture (calling DB directly in upper layer) were unfair, as it was not the point.
+Moreover, accusations and mockery about SQL injection were just ignorant,
 as even though it was not using parametrized query,
 there was a template string, which effectively does something similar —
-it splits arguments, and the dangerous part is simply ignored
-(you can learn about this particular situation [here](https://youtu.be/2Ggf45daK7k?t=75)).
+it splits arguments, and redundant, potentially dangerous part is simply ignored
+You can learn more about this particular situation [here](https://youtu.be/2Ggf45daK7k?t=75).
 
 But indeed, there is a challenge here, as without clear separation in homogenous SSR apps,
 we need to be more careful.
@@ -317,7 +317,7 @@ There are plenty of options here, depending on one's preferences and needs.
 I've already mentioned the anemic model situation, and this is where I see a potential for improvement.
 I think that extracting shared logic into a separate being might push devs to think more about the verbs,
 and less about the nouns.
-Or in wider terms: more about the business and domain, less about the data.
+Or in wider terms: more about the features, business and domain, less about the data.
 
 I've performed such exercise myself, you can find it [here](https://github.com/frankiewiczkamil/do-gather).
 
@@ -346,12 +346,13 @@ I see it as an attempt, to make our tools well suited to our needs: sharper and 
 I think that it's a good direction, and I'm looking forward to see how it will evolve.
 
 Moreover, I believe that asking questions might let us rethink even more fundamental concepts,
-like data flow and data ownership.
+like data flow, data ownership, who and when is responsible for ensuring invariants consistency.
+
 I myself keep my fingers crossed for local-first movement,
-and to me the paradigm it brings is not a competitor to server-side logic,
-but rather a complementary piece.
-Let's explore all the possible ways,
-use best suited tools for the job and implement bridges between them✌️
+which might look as something contradictory and incompatible with server-centric approach,
+but to me it is rather a complementary piece
+After all, the goal is always the best solution,
+and the way to achieve that is using best suited tools and building bridges between them✌️
 
 Thank you for reading, and see you next time 🖖
 
