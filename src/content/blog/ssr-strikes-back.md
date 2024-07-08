@@ -1,7 +1,7 @@
 ---
 title: 'Next v13: SSR strikes back'
 publishedAt: 2023-12-16
-editedAt: 2024-07-07
+editedAt: 2024-07-08
 description: 'Next 13+: evolution or revolution?'
 author: kpf
 tags: [ 'RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense' ]
@@ -21,14 +21,14 @@ merely reinventing Server-Side Rendering (SSR) as we know it from template engin
 Some people, on the other hand claim, that it's a revolution.
 So, who's got it right?
 
-Well, I reckon both sides have a point, but they're also missing a few beats.
+Well, I reckon both extremes have a point, but they're also missing a few beats.
 
 There are some significant changes in API that could be seen as a revolution in its own bubble, indeed.
 
 However, in a broader sense, it doesn't introduce anything entirely new.
 Instead, it redefines the ways of using existing tools, techniques, and patterns **together**.
 
-Furthermore, it breathes new life into some old concepts that were forgotten in the (post) SPA era.
+Interestingly, it breathes new life into some old concepts that were forgotten in the (post) SPA era.
 
 But before we delve into the nitty-gritty of what sets apart Next v13+ from its predecessors and competitors,
 let's quickly recap the evolution of the web, as we need to understand the historical context to see the full picture.
@@ -49,7 +49,7 @@ These milestones include:
 - single-page-applications (SPAs) and PWAs (CSR for everything, beside first load)
 - static site generation (SSG) and incremental static regeneration (ISR), aka JAMstack —
   essentially on-demand generation of static pages
-- homogeneous apps: SSR+SSG+ISR+CSR - all-in-one libraries with js on both sides (next.js, gatsby, remix, etc)
+- homogeneous apps: SSR+SSG+ISR+CSR — all-in-one libraries with js on both sides (next.js, gatsby, remix, etc)
 
 If you think about it, there are basically two main approaches to rendering web pages: server side and client side.
 The only difference between SSR, SSG and ISR is **when** the page is rendered.
@@ -66,42 +66,43 @@ This naturally led web apps to use the same APIs and the same flow for fetching 
 
 And those were REST APIs of course.
 Now think about this: REST APIs use some sort of language as a data format (usually JSON),
-while the traditional web approach was different - it was rather:
+while the traditional web approach was different — it was rather:
 
-- sending data by submitting **html** forms — key-value pairs
-- fetching data by following links to other pages - **html** documents
+- sending data by submitting **HTML** forms — key-value pairs
+- fetching data by following links to other pages — **HTML** documents
 
 Why did we abandon that?
 I think that using REST with SPA felt good, as we enjoyed the clear separation between:
 
-- application - it's logic, state, view/styling, offline-first support etc, and
+- application — it's logic, state, view/styling, offline-first support etc, and
 - the data
 
 It was like the box decoupled from its content.
 
 Also, as already partly stated,
-we were able to share same endpoints between different clients.
+we were able to share same endpoints among different clients.
 
 And finally, there was also that tempting promise, that frontend devs and backend devs can work independently.
 Well, maybe, but...
 
-It was causing a weird situation,
+It caused a weird situation,
 where we were using almost the same model for backend and frontend.
 There was too much logic leaking to the frontend layer, and responsibilities were unclear.
-And one might say: whatever, that's what we do 95% of our time - simple, CRUD apps.
+
+One might say here: whatever, that's what we do 95% of our time — simple CRUDs.
 I get it, but even so, what about those 5%?
-From my experience we tend to use a hammer for everything, if it's already in our hand.
+We tend to use a hammer for everything, if it's already in our hand.
 I've done it this way myself as well.
-Thus, we were ending up with
+Thus, we end up with
 [anemic models](https://en.wikipedia.org/wiki/Anemic_domain_model) on backend side and a lot of logic implemented in
 frontend[^1].
-Sometimes it was not even consistent.
-But I'm getting ahead of myself here - we will get back to this later.
+Sometimes it's not even consistent.
+But I'm getting ahead of myself here — we will get back to this later.
 
 Anyway, overall people seemed happy about the SPA approach,
 as it seemed that we had some sort of standard, reusable architecture at last.
 
-But there were some more urgent, negative consequences as well.
+But at some point important, negative consequences has been noticed.
 In SPA, if our app (document) is not yet 'installed' (fetched or cached locally),
 then we have to wait for it in almost idle state,
 as obviously it's not possible to predict which data is needed by the SPA upfront.
@@ -120,11 +121,12 @@ And they had a good argument here —
 what happened, so that we ended up with a worse user experience than we had before?
 Like I've already stated, everyone can spot the difference in terms of site's loading speed.
 
-There are also some other issues and limitations with SPAs, like SEO, but I won't go into details here.
+There were also some other issues and limitations with SPAs that were noticed,
+like SEO, but I won't go into details here.
 
 # Homogeneous apps
 
-At this point we already know, that we needed apps to load faster than SPAs.
+At this point we already know, that in some business areas we needed apps to load faster than SPAs.
 But on the other hand, we also wanted the interactivity.
 In other words, we aimed to have the best of both worlds:
 
@@ -151,20 +153,21 @@ First of all, we encountered a sort of technical debt.
 
 In previous generations of homogenous libs, like next v12 and older,
 in order to show something meaningful to the user quickly,
-we pre-render html on the server side,
+we pre-render HTML on the server side,
 but then on the client side we need to let react (or other library) to take over the control and mount everything.
 
 It's called
 [hydration](https://en.wikipedia.org/wiki/Hydration_(web_development)).
+
 It basically requires server components code to be executed twice: on the server and on the client.
-Additionally, there is a gap between the moment when html is rendered and visible,
+Additionally, there is a gap between the moment when HTML is rendered and visible,
 and the moment when interactive stuff is loaded (listeners are attached etc.).
 
 Secondly, if you think about it, handling loading more data using CSR is slightly inefficient at it's core,
 as **every** client has to transform the data from JSON to the state and then render it,
 even if no interactive support is required.
 
-## Elephant in the room - RSC, Suspense and streaming components
+## Elephant in the room — RSC, Suspense and streaming components
 
 In previous section I've mentioned that historically we had two approaches to rendering web pages:
 server side and client side,
@@ -177,10 +180,12 @@ that we can become faster (and get rid of hydration inefficiencies)
 by slightly changing our mindset?
 
 The idea here is using **components' streaming**, which is possible with React Server Components (RSC).
-So RSC are components that are truly server-side, meaning no rendering on a client is required.
+RSC are components that are truly server-side, meaning no rendering on a client is required.
 They can be nested inside other server side components,
-but also inside client components,
-and be **streamed** at some point in time (!).
+but also inside client components (!).
+But what is even more interesting,
+they are distributed asynchronously,
+what we call as **components streaming**.
 
 ### On-demand streaming for client components
 
@@ -191,9 +196,9 @@ or replacing some view without routing (changing the site or
 [path](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)),
 then inside the client component we can now wrap a server component with the `Suspense`,
 and pre-rendered server component will be streamed as `text/x-component`.
-This format is not pure html, but it contains all the required information about the component's structure,
+This format is not pure HTML, but it contains all the required information about the component's structure,
 and it's position inside the whole document,
-so it can be immediately mounted, **without redundant client side render**.
+so it can be immediately mounted, **without redundant, client side render**.
 
 That was interesting, though our initial pain point was the first render, right?
 So let's see what can we do about it with RSC.
@@ -202,6 +207,7 @@ So let's see what can we do about it with RSC.
 
 Consider this: requested page consists of some content that is basically static,
 but also some content that needs to be fetched from some other resources like DBs, APIs etc.
+
 There might be many things in many places on our page to fetch,
 and they may vary in terms of the latency.
 
@@ -214,7 +220,7 @@ so client receives 'fast pieces' first (and those might be interactive, ready fo
 and 'slower pieces' will arrive eventually later.
 One just needs to remember about wrapping each component with `Suspense`.
 
-Regarding the data format — just like with on-demand streaming — it's not a pure html.
+Regarding the data format — just like with on-demand streaming — it's not a pure HTML.
 However, it's not `text/x-component` either.
 Here, it rather takes advantage of the fact,
 that the browser can render HTML even if the whole document is not yet fetched.
@@ -228,7 +234,7 @@ It covers both scenarios that I've mentioned above,
 however please keep in mind that official support for on-demand streaming is slightly limited.
 I've described that
 [here](../../../blog/next-ssr-limitations/),
-and my examples contain a workaround example for that.
+and my examples contain a workaround proposal for that.
 
 We have covered the fetching part,
 so we can now take a look at flip-side,
@@ -240,18 +246,21 @@ In previous sections we learned, that for read operations we can trade the flexi
 and in turn get some significant gains in performance, so in consequence also in UX.
 However, I would say that there are some benefits in terms DX involved as well,
 as we don't need to manage so much state required for data fetching.
-I suppose that we might call it reducing the accidental, technical complexity that was involved due the AJAX/SPA legacy.
+I suppose that we might call it reducing the accidental, technical complexity,
+which is SPA's (or maybe even: AJAX) inherent consequence.
 
 I think that for write operations, it's even more about DX, and this is due the new feature called **actions**.
 So with actions we are not using REST as well,
 but rather we reuse an established technique, which is submittable forms.
 Actually, one doesn't even have to use a form, as actions exist in two flavors — with or without forms —
 but the big idea of submitting the data to current URL (like with forms) remains.
-One might think now:
+
+Obviously, one might think now:
 I see no benefit out of it at this point,
 so why would I even want to abandon my beloved REST endpoints for some ancient pattern?
 Well, imagine that you don't have to expose an endpoint for any modification operation,
-and that you can simply call a function in client component that will perform necessary calls for you.
+and that you can simply call a function in client component,
+that will perform all necessary network calls for you.
 Yeah, sort of like RPC. So this is exactly what actions give you.
 
 ## Reflections
@@ -259,11 +268,11 @@ Yeah, sort of like RPC. So this is exactly what actions give you.
 Of course, in next v13+ one is still able to do things in SPA way,
 like using REST APIs for reads and writes,
 but new features seem simpler and more efficient,
-so looks like a good defaults set.
+so it looks like a good set of defaults.
 
 I'm happy that we finally reached this point,
 where we were able to see a bigger picture,
-fill the gaps, and reuse some old ideas instead of creating some new,
+fill the gaps, and reuse some old ideas instead of creating another/new,
 hype-driven solution, focused on one, particular use case.
 
 ### Challenges
@@ -306,12 +315,12 @@ But there is one more thing that I'd like to point out here.
 And I think it's related to security risks I've mentioned in previous section.
 There is a
 [famous anecdote about chinese word for 'crisis'](https://en.wikipedia.org/wiki/Chinese_word_for_%22crisis%22),
-which - in a nutshell - says that crisis is an opportunity.
+which — in a nutshell — says that crisis is an opportunity.
 
 And I think it's true here.
 We have an opportunity to re-think how we organize our business logic implementation in node.js apps.
 I think, that actions as **another** entry point is a great opportunity to re-think architecture for people,
-who used to have only one entry point before - REST API.
+who used to have only one entry point before — REST API.
 
 There are plenty of options here, depending on one's preferences and needs.
 I've already mentioned the anemic model situation, and this is where I see a potential for improvement.
@@ -341,7 +350,7 @@ together with [island architecture](https://docs.astro.build/en/concepts/islands
 ([astro](https://docs.astro.build/), [fresh](https://fresh.deno.dev/)),
 [qwik](https://qwik.builder.io/)
 and [solid start](https://start.solidjs.com/getting-started/what-is-solidstart)
-are to me like a new trend in web development.
+are to me like a broader trend in web development.
 I see it as an attempt, to make our tools well suited to our needs: sharper and finer-grained.
 I think that it's a good direction, and I'm looking forward to see how it will evolve.
 
@@ -350,12 +359,13 @@ like data flow, data ownership, who and when is responsible for ensuring invaria
 
 I myself keep my fingers crossed for local-first movement,
 which might look as something contradictory and incompatible with server-centric approach,
-but to me it is rather a complementary piece
-After all, the goal is always the best solution,
+but to me it is rather a complementary piece.
+After all, the goal is finding the best solution,
 and the way to achieve that is using best suited tools and building bridges between them✌️
 
 Thank you for reading, and see you next time 🖖
 
 [^1]:In some cases it might make sense to have logic at frontend —
-like in local-first apps, but the point is that invariants shall be verified in appropriate place,
+like in local-first apps,
+but the point is that invariants shall be verified in appropriate place,
 which would be the server in most cases

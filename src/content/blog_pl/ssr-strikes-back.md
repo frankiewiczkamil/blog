@@ -1,7 +1,7 @@
 ---
 title: 'Next 13: SSR kontratakuje'
 publishedAt: 2023-12-16
-editedAt: 2022-12-20
+editedAt: 2024-07-08
 description: 'Next 13+: ewolucja czu rewolucja?'
 author: kpf
 tags: [ 'RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense' ]
@@ -21,7 +21,7 @@ Niektórzy utrzymują, że właściwie nie dostajemy nic nowego,
 Z drugiej jednak strony są i tacy, którzy twierdzą, że mamy do czynienia z rewolucją.
 Kto ma zatem rację?
 
-Cóż, obie strony mają swoje argumenty, ale umyka im szerszy kontekst.
+Cóż, z mojej perspektywy obie skrajne strony mają swoje argumenty, ale umyka im szerszy kontekst.
 
 Faktycznie, są pewne zmiany w API, które będąc w bańce reacta/nexta możnaby określić jako rewolucyjne.
 
@@ -65,15 +65,15 @@ to myślę, że stało się to **mniej** popularne wraz ze wzrostem popularnośc
 Moje zrozumienie tego stanu rzeczy jest takie,
 że aplikacje webowe miały niejako się upodobnić do aplikacji mobilnych/natywnych.
 Idąc tym tropem zaczęliśmy traktować HTMLa nie jako dokument, ale raczej wejście do naszej apki.
-To w naturalnie doprowadziło do uwspólnienia API i sposobu ich użycia.
+To w naturalny sposób doprowadziło do uwspólnienia API i sposobu ich użycia.
 
 Mowa tu oczywiście o API RESTowych.
 I zastanówmy się nad tym: RESTowe API używają jakiegoś formatu danych (zwykle JSONa),
 podczas gdy pierwotne podejście w sieci było inne — było to raczej:
 
-- wysyłanie danych poprzez **htmlowe** formularze, w postaci par klucz-wartość
+- wysyłanie danych poprzez **HTMLowe** formularze, w postaci par klucz-wartość
 - pobieranie danych odbywało się przez podążanie kolejnymi linkami do stron,
-  czyli dokumentów **html**
+  czyli dokumentów **HTML**
 
 Dlaczego porzuciliśmy to podejście?
 Myślę, że przede wszystkim podobało nam się używanie RESTa z SPA,
@@ -87,7 +87,7 @@ Było to jak oddzielenie opakowania od jego zawartości.
 Ponadto, jak już zostało to poniekąd wspomniane,
 mogliśmy współdzielić implementację endpointów pomiędzy różnymi klientami.
 
-No i na dokładkę, doszedł aspekt kuszącej obietnicy,
+No i na deser, doszła kusząca obietnica,
 że umożliwi to usprawnienie pracy poprzez uniezależnienie wysiłków nad backenedem i frontendem.
 Cóż, może i tak, ale...
 
@@ -99,7 +99,7 @@ a odpowiedzialność komponentów się rozmyła.
 Można by tu powiedzieć: no i co z tego, 95% naszych aplikacji to i tak CRUDy.
 Tak, a co z pozostałymi 5%?
 Używamy tego samego młotka, który już mamy w ręce.
-W efekcie kończyliśmy z
+W efekcie kończymy z
 [anemicznymi modelami](https://en.wikipedia.org/wiki/Anemic_domain_model)
 na backendzie i (zdublowaną) logiką na froncie[^1].
 Czasem nawet niespójną.
@@ -121,7 +121,7 @@ czy jego doświadczenie z produktem jest zadowalające w kontekście opóźnień
 
 Więc nawet gdy skeszujemy apkę/dokument w przeglądarce i/lub CDN odpowiada super szybko,
 to wciąż musimy każdorazowo podejmować decyzję jakich danych potrzebujemy,
-zanim jej pobierzemy, zrenderujemy i zaprezentujemy ostateczny rezultat.
+zanim je pobierzemy, zrenderujemy i zaprezentujemy ostateczny rezultat.
 Wciąż więc zostaje problem kaskady requestów, której nie da radu uniknąć.
 
 Domyślam się, że 'biznes' nie był zbyt szczęśliwy, szczególnie w obszarze e-commerce.
@@ -129,8 +129,8 @@ Mieli bowiem dobre argumenty —
 co tu się stało, że skończyliśmy z **gorszym** efektem, niż mieliśmy w poprzednich latach?
 Jak już wspomniałem, każdy zauważy różnicę w szybkości ładowania strony.
 
-Wspomnę również, że dostrzeżono również inne ograniczenia SPA,
-jak choćby SEO, ale nie będę sięna tym skupiał w tym wpisie.
+Dostrzeżono też inne ograniczenia SPA,
+jak choćby SEO, ale nie będę się na tym skupiał w tym wpisie.
 
 # Homogeniczne aplikacje
 
@@ -159,17 +159,17 @@ Oczywiście, że nie.
 Przede wszystkim, natrafiliśmy na coś w rodzaju długu technicznego.
 
 W przypadku pierwszych generacji homogenicznych aplikacji, takich jak next 12 i wcześniejszych,
-w celu pokazania czegoś sensownego szybko przy użyciu SSR, html jest prerenderowany po stronie serwera,
+w celu pokazania czegoś sensownego szybko przy użyciu SSR, HTML jest prerenderowany po stronie serwera,
 jednak po stronie klienta musi nastąpić przejęcie kontroli i zamontowanie tego wszystkiego.
 
-Jest to nazywane [nawadnianiem (hydracją)](https://en.wikipedia.org/wiki/Hydration_(web_development)).
+Jest to nazywane [nawadnianiem (hydration)](https://en.wikipedia.org/wiki/Hydration_(web_development)).
 
-Czyli chodzi po prostu o to, że kod komponentów serwerowych musi wykonać się dwa razy:
+Chodzi po prostu o to, że kod komponentów serwerowych musi wykonać się dwa razy:
 na serwerze i na kliencie.
-Dodatkowo jest luka między momentem gdy html jest widoczny i tym gdy jest już w pełni interaktywny,
+Dodatkowo jest luka między momentem gdy HTML jest widoczny i tym gdy jest już w pełni interaktywny,
 czyli ma podłączone odpowiednie listenery itd.
 
-Co więcej, jeśli się nad tym zastanowić,
+Po wtóre, jeśli się nad tym zastanowić,
 obsługa dociągania danych używając czystego CSR jest ze swojej natury nieco nieoptymalna,
 bo przecież **każdy** klient musi przemapować sobie dane z JSONa do swojego stanu i to zrenderować,
 nawet jeśli nie potrzebuje żadnej interaktywności.
@@ -189,21 +189,23 @@ musimy trochę zmienić naszą perspektywę.
 
 Chodzi tu o **strumieniowanie komponentów**, możliwe w React Server Components (RSC).
 Komponenty RSC są prawdziwie serwerowe, tzn. nie renderują się na kliencie.
-Mogą być osadzone wewnątrz innych komponentów serwerowych, ale również klienckich,
-a ich strumieniowanie (wysłanie) może być odroczone (!).
+Mogą być osadzone zarówno wewnątrz innych komponentów serwerowych, jak i w klienckich (!).
+Co jednak jeszcze ciekawsze,
+ich dystrybucja odbywa się asynchronicznie,
+co nazywamy **strumieniowaniem**.
 
 ### Dosyłanie na żądanie w komponentach klienckich
 
 Jeśli mamy zatem załadowaną stronę i chcemy wywołać jakąś interakcję zależną od danych,
 np. doładować więcej treści albo podmienić jakiś komponent bez przeładowania strony i
-[ścieżki](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)
+[ścieżki](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState),
 to w komponencie klienckim możemy teraz to zrobić opakowując komponent serwerowy w `Suspense`,
 a wyrenderowany wstępnie komponent zostanie wysłany jako `text/x-component`.
-Nie jest to czysty html, ale zawiera wszystkie informacje na temat struktury i pozycji w dokumencie,
-potrzebne do bezzwłocznego zamontowania, czyli **bez zduplikowanego rendera**.
+Nie jest to czysty HTML, ale zawiera wszystkie informacje na temat struktury i pozycji w dokumencie,
+potrzebne do bezzwłocznego zamontowania, czyli **bez zduplikowanego rendera na kliencie**.
 
-Ciekawe, jednak jako główną oś podałem pierwsze wczytanie, prawda?
-Zobaczmy zatem, co mamy do dyspozycji na tę okoliczność.
+Ciekawe, jednak źródłem problemów było pierwsze wczytanie, prawda?
+Zobaczmy zatem, co mamy do dyspozycji i na tę okoliczność.
 
 ### Przyrostowe, pierwsze ładowanie komponentów serwerowych
 
@@ -217,7 +219,7 @@ a te z kolei mogą mieć różne opóźnienia.
 W rezultacie, w klasycznym SSR ładowanie strony zajmuje tyle,
 ile jest potrzebne do pobrania wszystkich elementów, w szczególności tych najwolniejszych🐌
 
-Ale w next 13 możemy zrobić coś innego.
+Ale w next 13 nie musi tak być.
 
 Koncepcja jest taka, że pierwszy render może następować w częściach,
 dzięki czemu klient najpierw otrzymuje te 'szybsze kawałki' (i są one od razu gotowe do użycia),
@@ -233,9 +235,6 @@ tj. taki gdzie tagi nie są jeszcze domknięte, bo dokument jeszcze się pobiera
 Gdy spojrzymy na nagłówek `Transfer-Encoding`,
 to w tym przypadku zobaczymy, że użyte jest w tym celu `chunked`.
 
-that the browser can render HTML even if the whole document is not yet fetched.
-You can take a look at `Transfer-Encoding` header, and you will see that it's `chunked`.
-
 Genialne, nie?
 I jak już na wstępie zaznaczyłem:
 niby nie nowy pomysł, ale jednak nie jest to również wymyślanie na nowo PHP.
@@ -249,8 +248,8 @@ co opisałem
 a we wspomnianych przykładach pokazuję, jak da się to obejść.
 
 Skoro temat pobierania mamy już za sobą,
-spójrzmy na rewers,
-by zastanowić się, czy w wysyłaniu mamy również do czynienia z innowacjami.
+spójrzmy na nowości w wysyłaniu,
+żeby zobaczyć, czy i tam mamy do czynienia z innowacjami.
 
 ### Mutacje
 
@@ -260,21 +259,21 @@ w zamian za znaczące zyski w wydajności, czyli w konsekwencji UX.
 Jednocześnie, zaryzykowałbym tezę, że zyskujemy również w obszarze DX,
 a to dlatego, że nie musimy troszczyć się o zarządzanie stanem potrzebnym do obsługi pobierania danych.
 Myślę, że można to nazwać redukcją złożoności przypadkowej (technicznej),
-jaka jest dziedzictwem i immanentną właściwością SPA, lub nawet szerzej: AJAXa.
+jaka jest konsekwencją i immanentną właściwością SPA, lub nawet szerzej: AJAXa.
 
-W kontekście zapisów, nowości nexta to dla mnie głównie DX,
+W kontekście zapisów nowości w v13+ nakierowane są w mojej opinii jeszcze bardziej na DX,
 z uwagi na wprowadzenie **akcji**.
 W akcjach również nie używamy RESTa, ale raczej wracamy do sprawdzonej techniki,
-jaką są wysyłalne (subimttable) formularze.
+jaką są wysyłalne (submittable) formularze.
 Właściwie, to nawet nie chodzi o same formularze (akcji można używać nawet bez nich),
 ale o koncepcję wysyłania danych pod obecny URL.
 
-Oczywiście nasuwa się pytanie:
+Oczywiście nasuwa się myśl:
 po co rezygnować z ukochanego RESTa na rzecz jakiegoś starożytnego wzorca?
 Spróbujmy odpowiedzieć na to w ten sposób:
 wyobraź sobie, że nie musisz wystawiać endpointa dla każdej jednej operacji modyfikacji,
-bo może po prostu wywołać z klienckiego komponentu funkcję na serwerze,
-a całą obsługą zajmie się biblioteka.
+bo zamiast tego możesz po prostu wywołać z klienckiego komponentu funkcję,
+a całą obsługą po stronie sieciowej zajmie się biblioteka.
 Tak, coś jakby RPC.
 I to właśnie dają akcje.
 
@@ -288,7 +287,7 @@ które wydają się sensownym ustawieniem domyślnym.
 Cieszę się, że dotarliśmy do miejsca,
 gdzie udało się uchwycić szerszy wycinek rzeczywistości,
 wypełnić luki i wykorzystać sprawdzone rozwiązania,
-zamiast tworzyć kolejne rozwiązanie sprowokowane hajpem i skupione na jednym aspekcie.
+zamiast tworzyć kolejne napędzane hajpem i skupione na jednym aspekcie.
 
 ### Wyzwania
 
@@ -299,7 +298,8 @@ Po pierwsze, dodawanie nowych funkcjonalności w oczywisty sposób zwiększa zł
 choćby z uwagi na konieczność dokonywania wyborów.
 Podejrzewam, że mogło to skłonić autorów do wprowadzenia zmian API właśnie teraz.
 Nowy router bazuje na strukturze plików i nie ma już `getServerSideProps` i `getStaticProps`.
-Każdy może sam ocenić czy nowe API jest prostsze, czy nie, choć społeczność zdaje się pochwalać ten kierunek.
+Każdy może sam ocenić, czy nowe API jest prostsze, czy nie,
+a z moich obserwacji wynika, że społeczność zdaje się pochwalać ten kierunek.
 
 Możliwe, że słyszeliście już o zagrożeniach bezpieczeństwa w kontekście
 [przykładu pokazanego na konferencji nexta](https://youtu.be/9CN9RCzznZc?list=PLBnKlKpPeagl57K9bCw_IXShWQXePnXjY&t=939),
@@ -318,8 +318,7 @@ Więcej o tym konkretnym przypadku znajdziesz [tutaj](https://youtu.be/2Ggf45daK
 Jestem jednak skłonny przyznać,
 że z uwagi na brak narzuconej separacji w homogenicznych aplikacjach,
 musimy sami być bardziej ostrożni.
-
-Mam tu dobrą wiadomość —
+Mam tu jendak dobrą wiadomość —
 react już ma pewne zabezpieczenie, zwane
 [taints](https://react.dev/reference/react/experimental_taintObjectReference),
 które umożliwia wymuszanie bezpieczeństwa poprzez oznaczanie obiektów jak serwerowych.
@@ -373,10 +372,10 @@ Idąc dalej, wspomniane biblioteki razem z [island architecture](https://docs.as
 ([astro](https://docs.astro.build/), [fresh](https://fresh.deno.dev/)),
 [qwik](https://qwik.builder.io/)
 i [solid start](https://start.solidjs.com/getting-started/what-is-solidstart)
-zdają się być częścią nowego trendu.
+zdają się być częścią szerszego trendu.
 Widzę to jako próbę jeszcze lepszego dostosowania narzędzi do naszych potrzeb,
 przez bardziej granularne podeście.
-Podoba mi się ten kierunek i czekam jak się będzie rozwijał.
+Podoba mi się ten kierunek i czekam, jak się to będzie rozwijało.
 
 Na koniec jeszcze wspomnę,
 że takie stawianie pytań może prowadzić do kwestionowania nawet bardziej fundamentalnych konceptów,
@@ -392,6 +391,5 @@ Dziękuję, za Twój czas i do następnego razu🖖
 
 [^1]: W niektórych przypadkach logika na froncie może mieć sens —
 jak w przypadku aplikacji typu local-first,
-gdzie właścicielem jest użytkownik,
 jednak co do zasady niezmienniki powinny być pilnowany w jednym miejscu,
 którym w większości biznesów (e-commerce itd) jest jednak serwer
