@@ -5,10 +5,22 @@ import { useTranslations } from "../../i18n/lang-utils";
 import { languages } from "../../i18n/ui";
 const lang = Astro.currentLocale as keyof typeof languages
 const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+const currentLocale = Astro.currentLocale!;
 ---
 
 <div class="nav-links">
-  <a href={getRelativeLocaleUrl(Astro.currentLocale, '')}>{t('nav.home')}</a>·
-  <a href={getRelativeLocaleUrl(Astro.currentLocale, 'blog')}>{t('nav.blog')}</a>·
-  <a href={getRelativeLocaleUrl(Astro.currentLocale, 'about')}>{t('nav.about')}</a>
+  <a href={getRelativeLocaleUrl(currentLocale, '')}>{t('nav.home')}</a>·
+  <a href={getRelativeLocaleUrl(currentLocale, 'blog')}>{t('nav.blog')}</a>·
+  <a href={getRelativeLocaleUrl(currentLocale, 'about')}>{t('nav.about')}</a>
+
+  <span class="lang-switch">
+    {lang === 'en' ?
+        <span>en</span>
+        <a href={'/pl' + currentPath}>pl</a>
+        :
+        <a href={currentPath.replace('/pl', '') || '/'}>en</a>
+        <span>pl</span>
+    }
+  </span>
 </div>

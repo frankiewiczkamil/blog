@@ -7,3 +7,8 @@
 .nav-links {
   font-size: 1.5rem;
 }
+
+.lang-switch {
+    float: right;
+    font-size: 1.2rem;
+}
