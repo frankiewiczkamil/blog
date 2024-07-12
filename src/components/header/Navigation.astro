@@ -10,8 +10,7 @@ const currentLocale = Astro.currentLocale!;
 ---
 
 <div class="nav-links">
-  <a href={getRelativeLocaleUrl(currentLocale, '')}>{t('nav.home')}</a>·
-  <a href={getRelativeLocaleUrl(currentLocale, 'blog')}>{t('nav.blog')}</a>·
+  <a href={getRelativeLocaleUrl(currentLocale, '')}>{t('nav.blog')}</a>·
   <a href={getRelativeLocaleUrl(currentLocale, 'about')}>{t('nav.about')}</a>
 
   <span class="lang-switch">
