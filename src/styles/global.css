@@ -51,9 +51,9 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        color: rgb(232, 232, 203);
-        background-color: rgb(23, 23, 32);
+    :root {
+        --main-color: rgb(232, 232, 203);
+        --main-bg-color: rgb(23, 23, 32);
     }
 
     .dimmed {
@@ -75,9 +75,9 @@ a {
 }
 
 @media (prefers-color-scheme: light) {
-    body {
-        background-color: rgb(232, 232, 203);
-        color: rgb(23, 23, 32);
+    :root {
+        --main-color: rgb(23, 23, 32);
+        --main-bg-color: rgb(232, 232, 203);
     }
 
     .dimmed {
@@ -99,6 +99,8 @@ a {
 }
 
 body {
+    color: var(--main-color);
+    background-color: var(--main-bg-color);
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
