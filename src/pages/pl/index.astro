@@ -9,8 +9,5 @@ const latestPosts = await getCollection('blog_pl').then(toComponentFormat);
 ---
 
 <BaseLayout>
-  <section>
-    <h2>Ostatnie posty</h2>
-    <PostTiles posts={latestPosts} />
-  </section>
+  <PostTiles posts={latestPosts} />
 </BaseLayout>

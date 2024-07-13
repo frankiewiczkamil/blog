@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 import { getCollection } from 'astro:content';
 import PostTiles from '../components/latest/PostTiles.astro';
 import { toComponentFormat } from '../posts';
@@ -9,8 +8,5 @@ const latestPosts = await getCollection('blog').then(toComponentFormat);
 ---
 
 <BaseLayout>
-  <section>
-    <h2>Latest posts</h2>
-    <PostTiles posts={latestPosts} />
-  </section>
+  <PostTiles posts={latestPosts} />
 </BaseLayout>
