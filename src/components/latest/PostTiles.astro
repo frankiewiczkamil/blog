@@ -1,5 +1,6 @@
 ---
 import type { Post } from '../../layouts/post/postLayout';
+import { selectPostDate } from '../../layouts/post/postLayout';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import './PostTiles.css';
 import { getImage, Picture } from 'astro:assets';
@@ -56,7 +57,7 @@ const postz = await Promise.all(
             </div>
             <div class="tile__description">{post.data.description}</div>
             <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
-              {post.data.publishedAt.toLocaleDateString()}
+              {selectPostDate(post.data, lang)}
             </span>
           </a>
         </article>

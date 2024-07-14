@@ -3,13 +3,16 @@ import BaseLayout from '../BaseLayout.astro';
 import './postLayout.css';
 import { selectPostDate } from './postLayout';
 import { Picture } from 'astro:assets';
+import { languages } from '../../i18n/ui';
 const { frontmatter, slug } = Astro.props;
 const src = (await import(`../../pictures/${frontmatter.image.url}.jpg`)).default;
+
+const lang = Astro.currentLocale as keyof typeof languages;
 ---
 
 <BaseLayout>
   <section class="meta__timestamp" transition:name={'publishedAt_' + slug}>
-    {selectPostDate(frontmatter)}
+    {selectPostDate(frontmatter, lang)}
   </section>
 
   <h1 class="meta__title" transition:name={'title_' + slug}>{frontmatter.title}</h1>

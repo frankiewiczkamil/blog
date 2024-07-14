@@ -2,14 +2,13 @@ import type { CollectionEntry } from 'astro:content';
 
 export type PostData = Post['data'];
 export type Post = CollectionEntry<'blog' | 'blog_pl'>;
-const selectJoiner = ({ publishedAt }: PostData): string => (publishedAt ? ', ' : '');
 
-const selectEditedAtText = (frontmatter: PostData): string =>
-  frontmatter.editedAt ? `${selectJoiner(frontmatter)}edited ${frontmatter.editedAt.toLocaleDateString()}` : '';
-
-const selectPublishedAtText = ({ publishedAt }: PostData): string => publishedAt?.toLocaleDateString() || '';
-
-export const selectPostDate = (frontmatter: PostData): string => selectPublishedAtText(frontmatter) + selectEditedAtText(frontmatter);
+export function selectPostDate({ publishedAt, editedAt }: PostData, locale?: Intl.LocalesArgument) {
+  const publishedText = publishedAt?.toLocaleDateString(locale) || '';
+  const separator = publishedAt ? ', ' : '';
+  const editedText = editedAt ? `edited ${editedAt.toLocaleDateString(locale)}` : '';
+  return publishedText + separator + editedText;
+}
 
 export const selectPublishedAtTimestamp = (post: Post) => new Date(post.data.publishedAt).getTime();
 
