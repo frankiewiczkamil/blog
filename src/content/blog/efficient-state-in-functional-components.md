@@ -4,8 +4,7 @@ publishedAt: 2022-12-14
 editedAt: 2023-09-30
 description: How to change state in functional components without sacrificing performance
 author: kpf
-tags:
-  [ 'functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react' ]
+tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
 image:
   url: rocket-launch
   alt: 🚀 🚀 🚀
@@ -46,7 +45,7 @@ In other words, the rule is more or less that the component is rendered when:
 However, we need to understand, that the comparison is **shallow** - reference only, so:
 
 ```javascript
-({}) === ({}) // false
+({}) === {}; // false
 ```
 
 What about callbacks, that we want to use in our components then? Well, for new/anonymous functions it will work in a very same way:
@@ -55,7 +54,7 @@ What about callbacks, that we want to use in our components then? Well, for new/
 (x => x) === (x => x); // false
 ```
 
-So if we pass a *new* callback as a prop, it will cause a re-render everytime function reference changes.
+So if we pass a _new_ callback as a prop, it will cause a re-render everytime function reference changes.
 This becomes important in scenarios where we want to extract and encapsulate some logic in parent component and pass down only some callbacks and derivative of
 a state (or even no state at all).
 
@@ -103,10 +102,10 @@ If we were to implement a similar scenario as stated in previous listing, the si
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increase = () => setCount(count + 1); // 👈 create new instance on every run (!)
-    const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increase}/>);
+  const [count, setCount] = useState(0);
+  const increase = () => setCount(count + 1); // 👈 create new instance on every run (!)
+  const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
+  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
 }
 ```
 
@@ -116,10 +115,10 @@ That's true, but the callback requires the dependency array, thus a naive implem
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increase = useCallback(() => setCount(count + 1), [count]); // 👈 creates a new instance on every count change
-    const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increase}/>);
+  const [count, setCount] = useState(0);
+  const increase = useCallback(() => setCount(count + 1), [count]); // 👈 creates a new instance on every count change
+  const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
+  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
 }
 ```
 
@@ -144,17 +143,16 @@ The idea in this approach is to create a facade/wrapper with a static reference,
 This way the real callback might be changed, while wrappers reference stays untouched.
 
 ```javascript
-let currentIncreaseCallback = () => {
-};
+let currentIncreaseCallback = () => {};
 
 // this reference does not change
 const increaseRef = () => currentIncreaseCallback();
 
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    currentIncreaseCallback = () => setCount(count + 1);
-    const isUnder10 = count < 10;
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increaseRef}/>);
+  const [count, setCount] = useState(0);
+  currentIncreaseCallback = () => setCount(count + 1);
+  const isUnder10 = count < 10;
+  return <MemoizedComponent isUnder10={isUnder10} increase={increaseRef} />;
 }
 ```
 
@@ -197,15 +195,15 @@ I guess you already see, that it would be best to stick to the hooks alone. We w
 We have hooks for both, so let's see how we can make use of it.
 
 ```javascript
- function Container(_props) {
-    const [count, setCount] = useState(0);
-    const stateRef = useRef(count);
-    stateRef.current = count; // it needs to be assigned here, outside useCallback in case sth else changes the state (consistency!)
-    const increment = useCallback(function increment() {
-        setCount(++stateRef.current);
-    }, []);
+function Container(_props) {
+  const [count, setCount] = useState(0);
+  const stateRef = useRef(count);
+  stateRef.current = count; // it needs to be assigned here, outside useCallback in case sth else changes the state (consistency!)
+  const increment = useCallback(function increment() {
+    setCount(++stateRef.current);
+  }, []);
 
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -221,16 +219,16 @@ This is something that I've found sometime in the internet. Unfortunately I can'
 The tools we use are the very same as above, though since we want the solution to be generic, we rather put the whole callback to the `useRef` hook.
 
 ```javascript
-const useCommand = (callback) => {
-    const callbackRef = useRef(callback);
-    callbackRef.current = callback;
-    return useCallback((...args) => callbackRef.current(...args), []);
+const useCommand = callback => {
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
+  return useCallback((...args) => callbackRef.current(...args), []);
 };
 
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increment = useCommand(() => setCount(count + 1));
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  const [count, setCount] = useState(0);
+  const increment = useCommand(() => setCount(count + 1));
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -290,7 +288,7 @@ increment(); // still 1, instead of 2 💩
 ```
 
 And guess what: there is an alternative way of using `useState` from the very beginning, since hooks were introduced.
-The one with *functions*.
+The one with _functions_.
 
 Please take a look:
 
@@ -310,9 +308,9 @@ So let's implement the efficient counter one last time.
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increment = useCallback(() => setCount((prevCount) => prevCount + 1), []);
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  const [count, setCount] = useState(0);
+  const increment = useCallback(() => setCount(prevCount => prevCount + 1), []);
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -339,7 +337,9 @@ or [svelte](https://svelte.dev/).
 ---
 
 [^1]: unless prevented by using: `shouldComponentUpdate()`
-[^2]: unless prevented by using on of: `PureComponent`, `memo()`, `shouldComponentUpdate()`
-[^3]: in order to mitigate the `this` caveat one needs to either bind the method or use a (misleading) arrow syntax for methods instead of using anonymous
-functions because the latter changes reference as we have already seen above.
 
+[^2]: unless prevented by using on of: `PureComponent`, `memo()`, `shouldComponentUpdate()`
+
+[^3]:
+    in order to mitigate the `this` caveat one needs to either bind the method or use a (misleading) arrow syntax for methods instead of using anonymous
+    functions because the latter changes reference as we have already seen above.

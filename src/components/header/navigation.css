@@ -8,36 +8,37 @@
   font-size: 1.5rem;
 }
 
-.lang-switch{
-    position: absolute;
-    bottom: 0.1em;
-    right: 0;
-    height: 1em;
+.lang-switch {
+  position: absolute;
+  bottom: 0.1em;
+  right: 0;
+  height: 1em;
 }
 
 .lang-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: var(--main-bg-color);
-    padding: 0.5em;
-    z-index: 1;
-    border: solid;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--main-bg-color);
+  padding: 0.5em;
+  z-index: 1;
+  border: solid;
 }
 
-
-
-.lang-content a, .lang-content span {
-    float: right;
+.lang-content a,
+.lang-content span {
+  float: right;
 }
-.lang-content a{
-    padding: 0;
+.lang-content a {
+  padding: 0;
 }
 
-.lang-switch:hover .lang-content {display: block;}
+.lang-switch:hover .lang-content {
+  display: block;
+}
 
 svg {
-    fill: var(--main-color);
-    width: 1em;
-    height: 1em;
+  fill: var(--main-color);
+  width: 1em;
+  height: 1em;
 }

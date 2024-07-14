@@ -4,8 +4,7 @@ publishedAt: 2022-12-14
 editedAt: 2023-09-30
 description: Jak zmieniać stan w komponentach funkcyjnych bez utraty wydajności
 author: kpf
-tags:
-  [ 'functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react' ]
+tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
 image:
   url: rocket-launch
   alt: 🚀 🚀 🚀
@@ -59,7 +58,7 @@ Musimy jednak zrozumieć, że porównanie stanu i propsów jest **płytkie** -
 samej referencji, więc:
 
 ```javascript
-({}) === ({}) // false
+({}) === {}; // false
 ```
 
 A co z callbackami, które chcemy przekazać do komponentów?
@@ -122,10 +121,10 @@ Jeśli mielibyśmy zaimplementować podobny scenariusz jak powyżej, najprostsza
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increase = () => setCount(count + 1); // 👈 create new instance on every run (!)
-    const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increase}/>);
+  const [count, setCount] = useState(0);
+  const increase = () => setCount(count + 1); // 👈 create new instance on every run (!)
+  const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
+  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
 }
 ```
 
@@ -136,10 +135,10 @@ To prawda, ale `useCallback` wymaga tablicy z zależnościami jako argumentu, a 
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increase = useCallback(() => setCount(count + 1), [count]); // 👈 creates a new instance on every count change
-    const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increase}/>);
+  const [count, setCount] = useState(0);
+  const increase = useCallback(() => setCount(count + 1), [count]); // 👈 creates a new instance on every count change
+  const isUnder10 = count < 10; // 👈 state's derivative, primitive type - new value after 10 calls ☝️
+  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
 }
 ```
 
@@ -165,17 +164,16 @@ Pomysł polega na stworzeniu fasady (wrapper'a) ze statyczną referencją, któr
 W ten sposób właściwy callback może być zmieniony, podczas gdy referencja fasady pozostaje nietknięta.
 
 ```javascript
-let currentIncreaseCallback = () => {
-};
+let currentIncreaseCallback = () => {};
 
 // this reference does not change
 const increaseRef = () => currentIncreaseCallback();
 
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    currentIncreaseCallback = () => setCount(count + 1);
-    const isUnder10 = count < 10;
-    return (<MemoizedComponent isUnder10={isUnder10} increase={increaseRef}/>);
+  const [count, setCount] = useState(0);
+  currentIncreaseCallback = () => setCount(count + 1);
+  const isUnder10 = count < 10;
+  return <MemoizedComponent isUnder10={isUnder10} increase={increaseRef} />;
 }
 ```
 
@@ -222,15 +220,15 @@ Chcemy zmemoizować callback, ale też utrzymać stałą referencję.
 Wydawałoby się, że mamy hooki do obu tych celów, więc zobaczmy, jak możemy z nich skorzystać.
 
 ```javascript
- function Container(_props) {
-    const [count, setCount] = useState(0);
-    const stateRef = useRef(count);
-    stateRef.current = count; // it needs to be assigned here, outside useCallback in case sth else changes the state (consistency!)
-    const increment = useCallback(function increment() {
-        setCount(++stateRef.current);
-    }, []);
+function Container(_props) {
+  const [count, setCount] = useState(0);
+  const stateRef = useRef(count);
+  stateRef.current = count; // it needs to be assigned here, outside useCallback in case sth else changes the state (consistency!)
+  const increment = useCallback(function increment() {
+    setCount(++stateRef.current);
+  }, []);
 
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -250,16 +248,16 @@ aczkolwiek chcemy, aby rozwiązanie było bardziej ogólne,
 więc do refa wrzucamy cały callback.
 
 ```javascript
-const useCommand = (callback) => {
-    const callbackRef = useRef(callback);
-    callbackRef.current = callback;
-    return useCallback((...args) => callbackRef.current(...args), []);
+const useCommand = callback => {
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
+  return useCallback((...args) => callbackRef.current(...args), []);
 };
 
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increment = useCommand(() => setCount(count + 1));
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  const [count, setCount] = useState(0);
+  const increment = useCommand(() => setCount(count + 1));
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -349,9 +347,9 @@ Zaimplementujmy zatem nasz przypadek użycia ostatni raz.
 
 ```javascript
 function Container(_props) {
-    const [count, setCount] = useState(0);
-    const increment = useCallback(() => setCount((prevCount) => prevCount + 1), []);
-    return (<MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment}/>);
+  const [count, setCount] = useState(0);
+  const increment = useCallback(() => setCount(prevCount => prevCount + 1), []);
+  return <MemoizedChildComponent isBelowThreshold={count < THRESHOLD} increment={increment} />;
 }
 ```
 
@@ -384,7 +382,9 @@ czy [svelte](https://svelte.dev/).
 ---
 
 [^1]: chyba, że zapobiegniemy używając: `shouldComponentUpdate()`
-[^2]: chyba, że zapobiegniemy używając: `PureComponent`, `memo()`, `shouldComponentUpdate()`
-[^3]: żeby zapobiec problemowi z `this`, trzeba albo zbindować metodę, albo użyć (IMO mylącej) składni arrow function
-dla metod zamiast używania funkcji anonimowych, bo te zmieniają referencję jak już wiemy
 
+[^2]: chyba, że zapobiegniemy używając: `PureComponent`, `memo()`, `shouldComponentUpdate()`
+
+[^3]:
+    żeby zapobiec problemowi z `this`, trzeba albo zbindować metodę, albo użyć (IMO mylącej) składni arrow function
+    dla metod zamiast używania funkcji anonimowych, bo te zmieniają referencję jak już wiemy

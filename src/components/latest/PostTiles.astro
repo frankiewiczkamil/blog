@@ -1,12 +1,12 @@
 ---
-import type { Post } from "../../layouts/post/postLayout";
+import type { Post } from '../../layouts/post/postLayout';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import './PostTiles.css';
 import { getImage, Picture } from 'astro:assets';
-import { languages } from "../../i18n/ui";
-import { useTranslations } from "../../i18n/lang-utils";
+import { languages } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/lang-utils';
 
-const { posts } = Astro.props as { posts: Post[]; }
+const { posts } = Astro.props as { posts: Post[] };
 const lang = Astro.currentLocale as keyof typeof languages;
 const t = useTranslations(lang);
 
@@ -21,7 +21,7 @@ const postz = await Promise.all(
       },
       placeholder,
     };
-  })
+  }),
 );
 ---
 
@@ -30,35 +30,37 @@ const postz = await Promise.all(
     <h2>{t('blog.recent-posts')}</h2>
     <a href={getRelativeLocaleUrl(lang, '/blog')} title={t('blog.switch-to-list')}>
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
-        <path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+        <path
+          d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
+        ></path>
       </svg>
     </a>
   </div>
   <div class="tiles-container">
     {
-    postz.map(post => (
-      <article class="tile">
-        <a class="tile__link-container" href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}>
-          <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
-            <Picture
-              class="tile__picture"
-              src={post.picture.src}
-              formats={['avif', 'webp', 'jpg']}
-              alt={post.data.image?.alt || '🖼️'}
-              width="1280"
-              transition:name={'img_' + post.slug}
-            />
-            <div class="tile__title title" transition:name={'title_' + post.slug}>
-              {post.data.title}
+      postz.map(post => (
+        <article class="tile">
+          <a class="tile__link-container" href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}>
+            <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
+              <Picture
+                class="tile__picture"
+                src={post.picture.src}
+                formats={['avif', 'webp', 'jpg']}
+                alt={post.data.image?.alt || '🖼️'}
+                width="1280"
+                transition:name={'img_' + post.slug}
+              />
+              <div class="tile__title title" transition:name={'title_' + post.slug}>
+                {post.data.title}
+              </div>
             </div>
-          </div>
-          <div class="tile__description">{post.data.description}</div>
-          <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
-            {post.data.publishedAt.toLocaleDateString()}
-          </span>
-        </a>
-      </article>
-    ))
+            <div class="tile__description">{post.data.description}</div>
+            <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
+              {post.data.publishedAt.toLocaleDateString()}
+            </span>
+          </a>
+        </article>
+      ))
     }
   </div>
 </section>

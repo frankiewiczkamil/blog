@@ -4,7 +4,7 @@ publishedAt: 2022-12-22
 editedAt: 2022-12-22
 description: Krajobraz rozwiązań do zarządzania stanem w 2023 roku i jak wpływa to na adopcję redux i redux-saga
 author: kpf
-tags: [ 'redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state' ]
+tags: ['redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state']
 image:
   url: runes
   alt: ᛋᚬᚷᚨ
@@ -112,6 +112,8 @@ które może pomóc w rozwijaniu umiejętności i zrozumienia zaawansowanych tec
 
 ---
 
-[^1]: Zwane _akcją kompensacyjną_ i służy do wycofywania (_rollback_).
-W swojej istocie działa to jak _contra entry_ lub _storno_ w branży finansowej
+[^1]:
+    Zwane _akcją kompensacyjną_ i służy do wycofywania (_rollback_).
+    W swojej istocie działa to jak _contra entry_ lub _storno_ w branży finansowej
+
 [^2]: pamiętaj: proste != łatwe

@@ -4,7 +4,7 @@ publishedAt: 2022-12-03
 editedAt: 2022-12-11
 description: "The first one - who am I, what I'll do here, why and why so late"
 author: 'kpf'
-tags: [ 'personal', 'blogging', 'lurker' ]
+tags: ['personal', 'blogging', 'lurker']
 image:
   url: avenue
   alt: 🧳🧳🧳
@@ -27,8 +27,9 @@ solve some of my problems and at the same time share to the world (and maybe eve
 
 I'm not sure at this point if it'll be only IT stuff that I'll be writing about, but that's the main subject for sure. Time will tell.
 
-> _“It's a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept
-off to.”_  
+> _“It's a dangerous business, Frodo, going out your door. 
+> You step onto the road, and if you don't keep your feet, 
+> there's no knowing where you might be swept off to.”_  
 > ― J.R.R. Tolkien, _The Lord of the Rings_
 
 I suspect that the form of the posts will vary depending on the topic and how much is to say. My goal is not limited to publishing only long essays or analyses

@@ -4,7 +4,7 @@ publishedAt: 2023-03-19
 editedAt: 2024-07-02
 description: 'Przegląd technik obsługi efektów ubocznych: uzyskiwanie DRY, bez dodatkowej złożoności przypadkowej.'
 author: kpf
-tags: [ 'side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'reużywalność', 'orkiestracja', 'DRY' ]
+tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'reużywalność', 'orkiestracja', 'DRY']
 image:
   url: gears
   alt: ⚙️⚙️⚙️
@@ -28,11 +28,11 @@ Może to wyglądać np. tak:
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 ```
 
@@ -64,28 +64,28 @@ Weźmy przykład, gdzie mamy kilka funkcji koordynujących obsługę wyspecjaliz
 
 ```typescript
 async function coordinatorDefault() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 
 async function coordinatorX() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2X(result1); // 👈
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2X(result1); // 👈
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 
 async function coordinatorY() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2Y(result1); // 👈
-    const result3 = await sideEffect3Y(result2); // 👈
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
-    await sideEffect6Y(result4); // 👈
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2Y(result1); // 👈
+  const result3 = await sideEffect3Y(result2); // 👈
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
+  await sideEffect6Y(result4); // 👈
 }
 ```
 
@@ -103,26 +103,26 @@ Z mojego doświadczenia, (zbyt) częstym sposobem uzyskiwania DRY jest użycie w
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    let result2;
-    if (X) {
-        result2 = await sideEffect2X(result1);
-    } else if (Y) {
-        result2 = await sideEffect2Y(result1);
-    } else {
-        result2 = await sideEffect2(result1);
-    }
-    let result3;
-    if (Y) {
-        result3 = await sideEffect3Y(result2);
-    } else {
-        result3 = await sideEffect3(result2);
-    }
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
-    if (Y) {
-        await sideEffect6Y(result4);
-    }
+  const result1 = await sideEffect1();
+  let result2;
+  if (X) {
+    result2 = await sideEffect2X(result1);
+  } else if (Y) {
+    result2 = await sideEffect2Y(result1);
+  } else {
+    result2 = await sideEffect2(result1);
+  }
+  let result3;
+  if (Y) {
+    result3 = await sideEffect3Y(result2);
+  } else {
+    result3 = await sideEffect3(result2);
+  }
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
+  if (Y) {
+    await sideEffect6Y(result4);
+  }
 }
 ```
 
@@ -152,11 +152,11 @@ ale użyję czegoś jeszcze prostszego, by móc precyzyjniej analizować omawian
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2); // 👈
-    const result4 = await sideEffect4(result3); // 👈
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2); // 👈
+  const result4 = await sideEffect4(result3); // 👈
+  await sideEffect5(result4);
 }
 ```
 
@@ -167,17 +167,17 @@ W takim przypadku zwyczajnie wydzielamy im funkcję:
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await coordinatorLowerLevel(result1); // 👈
-    const result3 = await sideEffect4(result2);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await coordinatorLowerLevel(result1); // 👈
+  const result3 = await sideEffect4(result2);
+  await sideEffect5(result4);
 }
 
 // this function abstraction level is lower and/or it's a commonly used piece of code
 async function coordinatorLowerLevel(input) {
-    const result = await sideEffect2(input);
-    const result2 = sideEffect3(result);
-    return result2;
+  const result = await sideEffect2(input);
+  const result2 = sideEffect3(result);
+  return result2;
 }
 ```
 
@@ -197,13 +197,13 @@ Szczęśliwie, js/ts umożliwia używanie funkcji wyższego rzędu, więc możem
 type InAndOut<T> = (arg: T) => Promise<T>;
 
 function createSpecificImpl(sideEffect3Impl: InAndOut) {
-    return async function reusableCoordinator() {
-        const result1 = await sideEffect1();
-        const result2 = await sideEffect2(result1);
-        const result3 = await sideEffect3Impl(result2); // customized effect 💉
-        const result4 = await sideEffect4(result3);
-        await sideEffect5(result4);
-    };
+  return async function reusableCoordinator() {
+    const result1 = await sideEffect1();
+    const result2 = await sideEffect2(result1);
+    const result3 = await sideEffect3Impl(result2); // customized effect 💉
+    const result4 = await sideEffect4(result3);
+    await sideEffect5(result4);
+  };
 }
 
 const coordinator = createSpecificImpl(sideEffect3);
@@ -219,11 +219,11 @@ Wyobraźmy sobie, że są 2 warstwy, które chcemy wydzielić: `sideEffect1`+`si
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1(); // reusable 🍐
-    const result2 = await sideEffect2(result1); // reusable 🍎
-    const result3 = await sideEffect3(result2); // customized effect 💉
-    const result4 = await sideEffect4(result3); // reusable 🍎
-    await sideEffect5(result4); // reusable 🍐
+  const result1 = await sideEffect1(); // reusable 🍐
+  const result2 = await sideEffect2(result1); // reusable 🍎
+  const result3 = await sideEffect3(result2); // customized effect 💉
+  const result4 = await sideEffect4(result3); // reusable 🍎
+  await sideEffect5(result4); // reusable 🍐
 }
 ```
 
@@ -231,20 +231,20 @@ Dobra wiadomość jest taka, że możemy użyć tej samej techniki co poprzednio
 
 ```typescript
 function createMiddleCoordinator(sideEffect3Impl: InAndOut) {
-    return async function middleCoordinator(result1: number) {
-        const result2 = await sideEffect2(result1);
-        const result3 = await sideEffect3Impl(result2);
-        const result4 = await sideEffect4(result3);
-        return result4;
-    };
+  return async function middleCoordinator(result1: number) {
+    const result2 = await sideEffect2(result1);
+    const result3 = await sideEffect3Impl(result2);
+    const result4 = await sideEffect4(result3);
+    return result4;
+  };
 }
 
 function createOuter(nestedCoordinator: InAndOut) {
-    return async function middleCoordinator() {
-        const result1 = await sideEffect1();
-        const result4 = await nestedCoordinator(result1);
-        const result5 = await sideEffect5(result4);
-    };
+  return async function middleCoordinator() {
+    const result1 = await sideEffect1();
+    const result4 = await nestedCoordinator(result1);
+    const result5 = await sideEffect5(result4);
+  };
 }
 
 const coordinator = createOuter(createMiddleCoordinator(sideEffect3));
@@ -265,9 +265,9 @@ Poniżej kilka przykładów ze znanych bibliotek:
 ```typescript
 // lodash-fp flow
 const coordinator = flow([
-    createMiddleCoordinator,
-    createOuter,
-    // ...more higher order functions
+  createMiddleCoordinator,
+  createOuter,
+  // ...more higher order functions
 ])(sideEffect3);
 ```
 

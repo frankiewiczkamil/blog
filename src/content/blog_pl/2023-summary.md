@@ -3,9 +3,9 @@ title: Podsumowanie 2023 i plany na 2024
 publishedAt: 2024-01-21
 description: 'Podsumowanie 2023 pod kątem technicznym. Rozwój, zdobyte doświadczenia, obserwacje i plany na 2023.'
 author: kpf
-tags: [ summary, '2023', '2024', plans ]
+tags: [summary, '2023', '2024', plans]
 image:
-  url: "2023_2024"
+  url: '2023_2024'
   alt: 🍾🍾🍾
 draft: false
 ---
@@ -79,9 +79,9 @@ Było to na szczęście bezbolesne, pewnie również z uwagi na mały stopień s
 Trzymając się wątku bloga, to pod względem funkcjonalności właściwie nic nie dodałem,
 jednak dokonałem pewnych zmian ulepszeń szeroko rozumianego UX.
 W szczególności, rozszerzyłem obsługę grafik.
-Po pierwsze użyłem taga ```<picture>``` i oferowane są kolejno: avif,webp, jpg.
+Po pierwsze użyłem taga `<picture>` i oferowane są kolejno: avif,webp, jpg.
 Obsługa wielu formatów jest deklaratywna i odbywa się automatycznie w oparciu o funkcjonalność
-``` <Picture>``` z astro (w repo jest tylko jeden obrazek, astro ogarnia resztę).
+` <Picture>` z astro (w repo jest tylko jeden obrazek, astro ogarnia resztę).
 Po wtóre, widok główny ładuje grafiki w 2 rozmiarach: przeskalowaną miniaturkę (efekt rozmycia) oraz pełną wersję,
 która podmienia miniaturkę (doszedł krótki kawałek JSa).
 
@@ -93,7 +93,7 @@ Załóżmy więc, że jakieś minimum pracy z astro również zaliczone.
 
 Będąc wciąż przy frontendzie, nadmienię również,
 że z uwagi na przygotowania do rozmów na fullstackwe pozycje,
-odkurzyłem, a nawet pogłębiłem swoją wiedzę w obszarach które *nie* były na liście celów.
+odkurzyłem, a nawet pogłębiłem swoją wiedzę w obszarach które _nie_ były na liście celów.
 W szczególności w CSSie pochyliłem się nad flexem i gridem, a w react'cie nad hookami i kontekstem.
 Hitem okazało się moje 'odkrycie', że `setState` jako argument może przyjmować funkcję,
 co rozwiązuje potencjalną nieoptymalność którą opisałem w
@@ -133,4 +133,4 @@ Tym optymistycznym zdaniem zakończę.
 Życzę sobie i Wam, żeby 2024 uporządkował nieco chaos który nam towarzyszył w ostatnich latach,
 a ferment intelektualny który ów chaos wywołał, zaaowocował i wzmocnił społeczności.
 
-*Do następnego* 🖖
+_Do następnego_ 🖖

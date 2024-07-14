@@ -1,4 +1,4 @@
-import type {CollectionEntry} from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 export type PostData = Post['data'];
 export type Post = CollectionEntry<'blog' | 'blog_pl'>;

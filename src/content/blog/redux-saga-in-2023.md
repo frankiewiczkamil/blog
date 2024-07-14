@@ -4,7 +4,7 @@ publishedAt: 2022-12-22
 editedAt: 2022-12-22
 description: State management solutions landscape in 2023 and how does it affect adoption of redux and redux-saga in particular
 author: kpf
-tags: [ 'redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state' ]
+tags: ['redux', 'redux-saga', 'side effects', 'middleware', 'saga', 'x-state']
 image:
   url: runes
   alt: ᛋᚬᚷᚨ
@@ -78,6 +78,7 @@ simple[^2], and flexible API that can help develop your skills and understanding
 
 ---
 
-[^1]: It is called _compensating action_ and it serves similar purpose as a rollback. In it's essence it works like a _contra entry_ from the finance world (aka
-_storno_ in some languages)
+[^1]: It is called _compensating action_ and it serves similar purpose as a rollback. 
+In it's essence it works like a _contra entry_ from the finance world (aka _storno_ in some languages)
+
 [^2]: remember: simple != easy

@@ -4,7 +4,7 @@ publishedAt: 2023-12-16
 editedAt: 2024-07-08
 description: 'Next 13+: ewolucja czu rewolucja?'
 author: kpf
-tags: [ 'RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense' ]
+tags: ['RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense']
 image:
   url: rice-plantation
   alt: 🚧
@@ -162,7 +162,7 @@ W przypadku pierwszych generacji homogenicznych aplikacji, takich jak next 12 i 
 w celu pokazania czegoś sensownego szybko przy użyciu SSR, HTML jest prerenderowany po stronie serwera,
 jednak po stronie klienta musi nastąpić przejęcie kontroli i zamontowanie tego wszystkiego.
 
-Jest to nazywane [nawadnianiem (hydration)](https://en.wikipedia.org/wiki/Hydration_(web_development)).
+Jest to nazywane [nawadnianiem (hydration)](<https://en.wikipedia.org/wiki/Hydration_(web_development)>).
 
 Chodzi po prostu o to, że kod komponentów serwerowych musi wykonać się dwa razy:
 na serwerze i na kliencie.
@@ -389,7 +389,8 @@ a środkiem używanie adekwatnych narzędzi do problemu i budowanie mostów mię
 
 Dziękuję, za Twój czas i do następnego razu🖖
 
-[^1]: W niektórych przypadkach logika na froncie może mieć sens —
-jak w przypadku aplikacji typu local-first,
-jednak co do zasady niezmienniki powinny być pilnowany w jednym miejscu,
-którym w większości biznesów (e-commerce itd) jest jednak serwer
+[^1]:
+    W niektórych przypadkach logika na froncie może mieć sens —
+    jak w przypadku aplikacji typu local-first,
+    jednak co do zasady niezmienniki powinny być pilnowany w jednym miejscu,
+    którym w większości biznesów (e-commerce itd) jest jednak serwer

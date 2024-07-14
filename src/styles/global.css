@@ -1,29 +1,29 @@
 @font-face {
-    font-family: 'sansy';
-    src: url('/fonts/Oxygen-Bold.ttf');
+  font-family: 'sansy';
+  src: url('/fonts/Oxygen-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'standard';
-    font-weight: normal;
-    src: url('/fonts/Lovato\ Regular.otf');
+  font-family: 'standard';
+  font-weight: normal;
+  src: url('/fonts/Lovato\ Regular.otf');
 }
 
 @font-face {
-    font-family: 'standard';
-    font-weight: bolder;
-    src: url('/fonts/Lovato\ Regular.otf');
+  font-family: 'standard';
+  font-weight: bolder;
+  src: url('/fonts/Lovato\ Regular.otf');
 }
 
 @font-face {
-    font-family: 'standard';
-    font-weight: bold;
-    src: url('/fonts/Lovato\ Bold.otf');
+  font-family: 'standard';
+  font-weight: bold;
+  src: url('/fonts/Lovato\ Bold.otf');
 }
 
 html {
-    font-family: standard, sans-serif, Tahoma, Verdana;
-    font-size: 20px;
+  font-family: standard, sans-serif, Tahoma, Verdana;
+  font-size: 20px;
 }
 
 header,
@@ -34,120 +34,119 @@ h4,
 h5,
 h6,
 .title {
-    font-family: sansy, Verdana, sans-serif;
+  font-family: sansy, Verdana, sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover,
 a:focus {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 a {
-    color: #df6363;
+  color: #df6363;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --main-color: rgb(232, 232, 203);
-        --main-bg-color: rgb(23, 23, 32);
-    }
+  :root {
+    --main-color: rgb(232, 232, 203);
+    --main-bg-color: rgb(23, 23, 32);
+  }
 
-    .dimmed {
-        color: rgb(178, 178, 149);
-    }
+  .dimmed {
+    color: rgb(178, 178, 149);
+  }
 
-    .border__dimmed {
-        border-color: rgb(178, 178, 149);
-    }
+  .border__dimmed {
+    border-color: rgb(178, 178, 149);
+  }
 
-    a:hover,
-    a:focus {
-        text-decoration-color: #a1df63;
-    }
+  a:hover,
+  a:focus {
+    text-decoration-color: #a1df63;
+  }
 
-    header {
-        background-color: rgb(23, 23, 32);
-    }
+  header {
+    background-color: rgb(23, 23, 32);
+  }
 }
 
 @media (prefers-color-scheme: light) {
-    :root {
-        --main-color: rgb(23, 23, 32);
-        --main-bg-color: rgb(232, 232, 203);
-    }
+  :root {
+    --main-color: rgb(23, 23, 32);
+    --main-bg-color: rgb(232, 232, 203);
+  }
 
-    .dimmed {
-        color: gray;
-    }
+  .dimmed {
+    color: gray;
+  }
 
-    .border__dimmed {
-        border-color: gray;
-    }
+  .border__dimmed {
+    border-color: gray;
+  }
 
-    a:hover,
-    a:focus {
-        text-decoration-color: #0b7215;
-    }
+  a:hover,
+  a:focus {
+    text-decoration-color: #0b7215;
+  }
 
-    header {
-        background-color: rgb(232, 232, 203);
-    }
+  header {
+    background-color: rgb(232, 232, 203);
+  }
 }
 
 body {
-    color: var(--main-color);
-    background-color: var(--main-bg-color);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
-    margin: 0 auto;
-    max-width: 120ch;
+  color: var(--main-color);
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+  margin: 0 auto;
+  max-width: 120ch;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 header {
-    border-bottom: solid;
-    position: sticky;
-    top: 0px;
-    z-index: 1;
+  border-bottom: solid;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
 }
 
 .wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding-left: 1em;
-    padding-right: 1em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .content {
-    flex: 1;
+  flex: 1;
 }
 
 footer {
-    flex-shrink: 0;
-    margin-top: auto;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 code {
-
-    font-size: 80%;
+  font-size: 80%;
 }
 
 pre {
-    padding: 0.25em 0.5em;
-    overflow-x: auto;
+  padding: 0.25em 0.5em;
+  overflow-x: auto;
 }
 
 @media (prefers-color-scheme: light) {
-    pre {
-        filter: invert(100%);
-    }
+  pre {
+    filter: invert(100%);
+  }
 }

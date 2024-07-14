@@ -1,27 +1,26 @@
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 640px;
-    height: auto;
-
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+  height: auto;
 }
 
 @media screen and (max-width: 700px) {
-    img {
-        max-width: 100%;
-    }
+  img {
+    max-width: 100%;
+  }
 }
 
 .post {
-    line-height: 1.2em;
+  line-height: 1.2em;
 }
 
 .meta__timestamp {
-    padding-top: 0.2em;
-    float: right;
+  padding-top: 0.2em;
+  float: right;
 }
 
 .meta__title {
-    clear: right;
+  clear: right;
 }

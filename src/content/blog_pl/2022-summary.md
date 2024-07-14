@@ -4,7 +4,7 @@ publishedAt: 2022-12-29
 editedAt: 2022-12-30
 description: 'Podsumowanie 2022 pod kątem technicznym. Rozwój, zdobyte doświadczenia, obserwacje i plany na 2023.'
 author: kpf
-tags: [ summary, '2022', '2023', plans ]
+tags: [summary, '2022', '2023', plans]
 image:
   url: fireworks
   alt: 🍾🍾🍾
@@ -159,5 +159,6 @@ Jestem pod wrażeniem jego diagnoz i prostoty którą proponuje, przez co jestem
 
 **Niech moc będzie z wami, szczęśliwego Nowego Roku!** 🥂
 
-[^1]: znanej również jako architektura portów i adapterów i bardzo podobnej do _onion architecture_ wujka Boba (aż dziw,
-że nie zrobiła kariery w naszym kraju 🧅)
+[^1]:
+    znanej również jako architektura portów i adapterów i bardzo podobnej do _onion architecture_ wujka Boba (aż dziw,
+    że nie zrobiła kariery w naszym kraju 🧅)

@@ -3,9 +3,9 @@ title: 2023 Summary and 2024 Plans
 publishedAt: 2024-01-22
 description: 'An overview of 2023 from my technical standpoint, encompassing growth, experience, observations, reflections and plans.'
 author: kpf
-tags: [ summary, '2023', '2024', plans ]
+tags: [summary, '2023', '2024', plans]
 image:
-  url: "2023_2024"
+  url: '2023_2024'
   alt: 🍾🍾🍾
 draft: false
 ---
@@ -85,9 +85,9 @@ Staying on the blog thread, in terms of features, I didn't really add anything.
 However, I made certain changes to enhance the overall UX.
 
 In particular, I extended the graphics support.
-First of all, I used the ```<picture>``` tag and the following formats are offered now: avif, webp, jpg.
+First of all, I used the `<picture>` tag and the following formats are offered now: avif, webp, jpg.
 The support for multiple formats is declarative, and it is done automatically based on the astro's
-```<Picture>``` - there is only one image in the repo, astro handles the rest.
+`<Picture>` - there is only one image in the repo, astro handles the rest.
 Secondly, the main view loads graphics in 2 sizes: a scaled-down thumbnail (blur effect) and a full version,
 which replaces the thumbnail (a short piece of JS was added).
 
@@ -98,7 +98,7 @@ which is supported now in astro.
 So let's assume that some minimum astro workout is also checked.
 
 Still on the frontend field, I will also mention that due to preparations for fullstack interviews,
-I dusted off and even deepened my knowledge in areas that were *not* on the goals list.
+I dusted off and even deepened my knowledge in areas that were _not_ on the goals list.
 In particular, in CSS I looked into flex and grid, and in react into hooks and context.
 The most impressive discovery to me was that `setState` can take a function as an argument,
 which solves the potential inefficiency I described in

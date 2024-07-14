@@ -4,7 +4,7 @@ publishedAt: 2023-12-16
 editedAt: 2024-07-08
 description: 'Next 13+: evolution or revolution?'
 author: kpf
-tags: [ 'RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense' ]
+tags: ['RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense']
 image:
   url: rice-plantation
   alt: 🚧
@@ -157,7 +157,7 @@ we pre-render HTML on the server side,
 but then on the client side we need to let react (or other library) to take over the control and mount everything.
 
 It's called
-[hydration](https://en.wikipedia.org/wiki/Hydration_(web_development)).
+[hydration](<https://en.wikipedia.org/wiki/Hydration_(web_development)>).
 
 It basically requires server components code to be executed twice: on the server and on the client.
 Additionally, there is a gap between the moment when HTML is rendered and visible,
@@ -365,7 +365,8 @@ and the way to achieve that is using best suited tools and building bridges betw
 
 Thank you for reading, and see you next time 🖖
 
-[^1]:In some cases it might make sense to have logic at frontend —
-like in local-first apps,
-but the point is that invariants shall be verified in appropriate place,
-which would be the server in most cases
+[^1]:
+    In some cases it might make sense to have logic at frontend —
+    like in local-first apps,
+    but the point is that invariants shall be verified in appropriate place,
+    which would be the server in most cases

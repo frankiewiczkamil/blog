@@ -2,9 +2,9 @@
 title: 'Hello, world × Co × Dlaczego'
 publishedAt: 2022-12-03
 editedAt: 2022-12-11
-description: "Ten pierwszy: kim jestem, co tu będę robił, dlaczego i dlaczego dopiero teraz."
+description: 'Ten pierwszy: kim jestem, co tu będę robił, dlaczego i dlaczego dopiero teraz.'
 author: 'kpf'
-tags: [ 'personal', 'blogging', 'lurker' ]
+tags: ['personal', 'blogging', 'lurker']
 image:
   url: avenue
   alt: 🧳🧳🧳
@@ -37,9 +37,9 @@ Być może nawet dostanę feedback.
 Na tym etapie nie jestem pewien, czy będą tu wyłącznie tematy dotyczące IT, ale na pewno w nie celuję przede wszystkim.
 Czas pokaże.
 
-
-> _“It's a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet,
-there's no knowing where you might be swept ff to.”_  
+> _“It's a dangerous business, Frodo, going out your door. 
+> You step onto the road, and if you don't keep your feet,
+> there's no knowing where you might be swept ff to.”_  
 > ― J.R.R. Tolkien, _The Lord of the Rings_
 
 Co do formy, to podejrzewam, że będzie ona zależna od tematu i tego ile mam w nim do powiedzenia.

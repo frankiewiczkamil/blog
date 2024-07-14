@@ -4,7 +4,7 @@ publishedAt: 2023-03-19
 editedAt: 2024-07-02
 description: 'Exploring the art of side effects handling: navigating trade-offs between DRY and complexity.'
 author: kpf
-tags: [ 'side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'DRY' ]
+tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'DRY']
 image:
   url: gears
   alt: ⚙️⚙️⚙️
@@ -25,11 +25,11 @@ It may look like this:
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 ```
 
@@ -60,28 +60,28 @@ Let's take an example where we have multiple coordinator functions for multiple 
 
 ```typescript
 async function coordinatorDefault() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 
 async function coordinatorX() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2X(result1); // 👈
-    const result3 = await sideEffect3(result2);
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2X(result1); // 👈
+  const result3 = await sideEffect3(result2);
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
 }
 
 async function coordinatorY() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2Y(result1); // 👈
-    const result3 = await sideEffect3Y(result2); // 👈
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
-    await sideEffect6Y(result4); // 👈
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2Y(result1); // 👈
+  const result3 = await sideEffect3Y(result2); // 👈
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
+  await sideEffect6Y(result4); // 👈
 }
 ```
 
@@ -100,26 +100,26 @@ From my experience one can (too) often encounter a situation where DRY is achiev
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    let result2;
-    if (X) {
-        result2 = await sideEffect2X(result1);
-    } else if (Y) {
-        result2 = await sideEffect2Y(result1);
-    } else {
-        result2 = await sideEffect2(result1);
-    }
-    let result3;
-    if (Y) {
-        result3 = await sideEffect3Y(result2);
-    } else {
-        result3 = await sideEffect3(result2);
-    }
-    const result4 = await sideEffect4(result3);
-    await sideEffect5(result4);
-    if (Y) {
-        await sideEffect6Y(result4);
-    }
+  const result1 = await sideEffect1();
+  let result2;
+  if (X) {
+    result2 = await sideEffect2X(result1);
+  } else if (Y) {
+    result2 = await sideEffect2Y(result1);
+  } else {
+    result2 = await sideEffect2(result1);
+  }
+  let result3;
+  if (Y) {
+    result3 = await sideEffect3Y(result2);
+  } else {
+    result3 = await sideEffect3(result2);
+  }
+  const result4 = await sideEffect4(result3);
+  await sideEffect5(result4);
+  if (Y) {
+    await sideEffect6Y(result4);
+  }
 }
 ```
 
@@ -149,11 +149,11 @@ but I'll use something even simpler in order to be precise while talking about r
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await sideEffect2(result1);
-    const result3 = await sideEffect3(result2); // 👈
-    const result4 = await sideEffect4(result3); // 👈
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await sideEffect2(result1);
+  const result3 = await sideEffect3(result2); // 👈
+  const result4 = await sideEffect4(result3); // 👈
+  await sideEffect5(result4);
 }
 ```
 
@@ -164,17 +164,17 @@ Either way, we will solve that by extracting those side effects to another funct
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1();
-    const result2 = await coordinatorLowerLevel(result1); // 👈
-    const result3 = await sideEffect4(result2);
-    await sideEffect5(result4);
+  const result1 = await sideEffect1();
+  const result2 = await coordinatorLowerLevel(result1); // 👈
+  const result3 = await sideEffect4(result2);
+  await sideEffect5(result4);
 }
 
 // this function abstraction level is lower and/or it's a commonly used piece of code
 async function coordinatorLowerLevel(input) {
-    const result = await sideEffect2(input);
-    const result2 = sideEffect3(result);
-    return result2;
+  const result = await sideEffect2(input);
+  const result2 = sideEffect3(result);
+  return result2;
 }
 ```
 
@@ -198,13 +198,13 @@ so we can create a specific implementation factory like this:
 type InAndOut<T> = (arg: T) => Promise<T>;
 
 function createSpecificImpl(sideEffect3Impl: InAndOut) {
-    return async function reusableCoordinator() {
-        const result1 = await sideEffect1();
-        const result2 = await sideEffect2(result1);
-        const result3 = await sideEffect3Impl(result2); // customized effect 💉
-        const result4 = await sideEffect4(result3);
-        await sideEffect5(result4);
-    };
+  return async function reusableCoordinator() {
+    const result1 = await sideEffect1();
+    const result2 = await sideEffect2(result1);
+    const result3 = await sideEffect3Impl(result2); // customized effect 💉
+    const result4 = await sideEffect4(result3);
+    await sideEffect5(result4);
+  };
 }
 
 const coordinator = createSpecificImpl(sideEffect3);
@@ -221,11 +221,11 @@ Imagine, that there are 2 layers that we want to be extracted:
 
 ```typescript
 async function coordinator() {
-    const result1 = await sideEffect1(); // reusable 🍐
-    const result2 = await sideEffect2(result1); // reusable 🍎
-    const result3 = await sideEffect3(result2); // customized effect 💉
-    const result4 = await sideEffect4(result3); // reusable 🍎
-    await sideEffect5(result4); // reusable 🍐
+  const result1 = await sideEffect1(); // reusable 🍐
+  const result2 = await sideEffect2(result1); // reusable 🍎
+  const result3 = await sideEffect3(result2); // customized effect 💉
+  const result4 = await sideEffect4(result3); // reusable 🍎
+  await sideEffect5(result4); // reusable 🍐
 }
 ```
 
@@ -233,20 +233,20 @@ Good news: to solve this one, we can use the very same technique:
 
 ```typescript
 function createMiddleCoordinator(sideEffect3Impl: InAndOut) {
-    return async function middleCoordinator(result1: number) {
-        const result2 = await sideEffect2(result1);
-        const result3 = await sideEffect3Impl(result2);
-        const result4 = await sideEffect4(result3);
-        return result4;
-    };
+  return async function middleCoordinator(result1: number) {
+    const result2 = await sideEffect2(result1);
+    const result3 = await sideEffect3Impl(result2);
+    const result4 = await sideEffect4(result3);
+    return result4;
+  };
 }
 
 function createOuter(nestedCoordinator: InAndOut) {
-    return async function middleCoordinator() {
-        const result1 = await sideEffect1();
-        const result4 = await nestedCoordinator(result1);
-        const result5 = await sideEffect5(result4);
-    };
+  return async function middleCoordinator() {
+    const result1 = await sideEffect1();
+    const result4 = await nestedCoordinator(result1);
+    const result5 = await sideEffect5(result4);
+  };
 }
 
 const coordinator = createOuter(createMiddleCoordinator(sideEffect3));
@@ -267,9 +267,9 @@ Here are some examples from popular libraries:
 ```typescript
 // lodash-fp flow
 const coordinator = flow([
-    createMiddleCoordinator,
-    createOuter,
-    // ...more higher order functions
+  createMiddleCoordinator,
+  createOuter,
+  // ...more higher order functions
 ])(sideEffect3);
 ```
 
