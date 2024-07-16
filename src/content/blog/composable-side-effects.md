@@ -11,7 +11,7 @@ image:
 draft: false
 ---
 
-# Context
+## Context
 
 Event driven libraries provide a sophisticated set of tools for dealing with async APIs.
 However, it can easily be overused.
@@ -37,7 +37,7 @@ We have a sequence of side effects, where output of effect can be input for the 
 question: is this implementation optimal?
 Well, it depends.
 
-# Heuristics
+## Heuristics
 
 There are many reasons why we might consider our code as poorly designed and/or implemented, though I'd like to
 highlight two main classes of heuristics that I
@@ -52,9 +52,9 @@ In this post I'll use only examples for DRY heuristics, because it's easier to p
 techniques that we will use for redesigning
 and refactoring are more or less universal and can be applied regardless the reason.
 
-# Techniques
+## Techniques
 
-## Conditionals vs polymorphism
+### Conditionals vs polymorphism
 
 Let's take an example where we have multiple coordinator functions for multiple use cases, like this:
 
@@ -140,9 +140,9 @@ Keeping the logic understandable is far more important than _some_ repeating cod
 though using polymorphism (use case oriented) approach doesn't mean that we can't have DRY as well.
 So let's talk about the techniques that we can use to achieve both things.
 
-# Refactoring techniques
+## Refactoring techniques
 
-## Extracting a function
+### Extracting a function
 
 Our previous example wasn't complicated,
 but I'll use something even simpler in order to be precise while talking about refactoring techniques.
@@ -187,7 +187,7 @@ Moreover, as we have already seen in our first example - life is rarely that sim
 It is often the case that our side effects need to vary in multiple places,
 and scenario interleaves reusable parts with more specific ones.
 
-## Extracting a higher order function
+### Extracting a higher order function
 
 Let's assume, that our reusable part includes: `sideEffect1`, `sideEffect4` and `sideEffect5`
 (first, last but one and the last one).
@@ -214,7 +214,7 @@ Cool, huh?
 But what if things are slightly more complicated,
 and we need more than one level of reusable logic and/or more than one piece of reusable code?
 
-## Tricky cases — deep nesting
+### Tricky cases — deep nesting
 
 Imagine, that there are 2 layers that we want to be extracted:
 `sideEffect1`+`sideEffect5` and `sideEffect2`+`sideEffect4`
@@ -283,7 +283,7 @@ const coordinator = compose(createOuter, createMiddleCoordinator)(sideEffect3);
 const coordinator = pipe(sideEffect3, createMiddleCoordinator, createOuter);
 ```
 
-# Summary
+## Summary
 
 We have learned that if we have many conditional statements in our side effects coordinators (orchestrators),
 then it's best to extract functions that represent less complicated flows.

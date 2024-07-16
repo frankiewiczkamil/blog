@@ -124,7 +124,7 @@ Like I've already stated, everyone can spot the difference in terms of site's lo
 There were also some other issues and limitations with SPAs that were noticed,
 like SEO, but I won't go into details here.
 
-# Homogeneous apps
+### Homogeneous apps
 
 At this point we already know, that in some business areas we needed apps to load faster than SPAs.
 But on the other hand, we also wanted the interactivity.

@@ -132,7 +132,7 @@ Jak już wspomniałem, każdy zauważy różnicę w szybkości ładowania strony
 Dostrzeżono też inne ograniczenia SPA,
 jak choćby SEO, ale nie będę się na tym skupiał w tym wpisie.
 
-# Homogeniczne aplikacje
+### Homogeniczne aplikacje
 
 Jak już ustaliliśmy, w wielu obszarach istnieje biznesowa potrzeba ładowania stron szybciej, niż dzieje się to w SPA.
 Z drugiej jednak strony, nie chcemy tracić interaktywności.

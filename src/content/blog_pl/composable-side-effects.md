@@ -11,7 +11,7 @@ image:
 draft: false
 ---
 
-# Kontekst
+## Kontekst
 
 Biblioteki sterowane zdarzeniami (event-driven)
 dostarczają nam pokaźne zestawów narzędzi do obsługi asynchronicznych API.
@@ -41,7 +41,7 @@ Spróbujmy zatem odpowiedzieć na pytanie:
 czy taka implementacja jest optymalna?
 No cóż, jak zwykle — to zależy.
 
-# Heurystyki
+## Heurystyki
 
 Jest wiele powodów, dla których można uznać dany kod za kiepsko zaprojektowany i/lub zaimplementowany,
 jednak dwie heurystyki wydają mi się szczególnie użyteczne w kontekście oceny orkiestracji obsługi efektów ubocznych.
@@ -56,9 +56,9 @@ głównie z uwagi na fakt, że trudno na syntetycznym przykładzie omawiać pozi
 Jednakowoż techniki refaktoringu, których użyjemy, wydają mi się uniwersalne,
 tzn. użyteczne niezależnie od przyczyny ich wykorzystania.
 
-# Techniki
+## Techniki
 
-## Warunki vs polimorfizm
+### Warunki vs polimorfizm
 
 Weźmy przykład, gdzie mamy kilka funkcji koordynujących obsługę wyspecjalizowanych funkcji efektów ubocznych:
 
@@ -143,9 +143,9 @@ Zachowanie czytelności jest dużo ważniejsze niż powtarzający się kod,
 jednak użycie polimorfizmu nie musi oznaczać rezygnacji z DRY.
 Spróbujmy zatem osiągnąć obie rzeczy.
 
-# Techniki refaktoringu
+## Techniki refaktoringu
 
-## Wydzielanie funkcji
+### Wydzielanie funkcji
 
 Poprzedni przykład nie był skomplikowany,
 ale użyję czegoś jeszcze prostszego, by móc precyzyjniej analizować omawiane techniki.
@@ -188,7 +188,7 @@ To poręczna technika, _ale można jej użyć tylko wtedy, gdy wywołania nastę
 Co więcej, jak już widzieliśmy w pierwszym przykładzie, może nastąpić sytuacja,
 gdzie reużywalne side effecty przeplatane są tymi charakterystycznymi dla danego scenariusza (koordynatora).
 
-## Wydzielanie funkcji wyższego rzędu
+### Wydzielanie funkcji wyższego rzędu
 
 Załóżmy, że reużywalne części to: `sideEffect1`, `sideEffect4` i `sideEffect5` (pierwszy, przedostatni i ostatni).
 Szczęśliwie, js/ts umożliwia używanie funkcji wyższego rzędu, więc możemy tworzyć fabryki w następujący sposób:
@@ -213,7 +213,7 @@ Nieźle, nie?
 Co jednak gdy sprawy się bardziej komplikują i potrzebujemy więcej niż jednego poziomu reużywalnej logiki i/lub
 więcej niż jednego reużywalnego kawałka?
 
-## Ciekawe przypadki — wielokrotne zagnieżdżenie
+### Ciekawe przypadki — wielokrotne zagnieżdżenie
 
 Wyobraźmy sobie, że są 2 warstwy, które chcemy wydzielić: `sideEffect1`+`sideEffect5` i `sideEffect2`+`sideEffect4`
 
@@ -281,7 +281,7 @@ const coordinator = compose(createOuter, createMiddleCoordinator)(sideEffect3);
 const coordinator = pipe(sideEffect3, createMiddleCoordinator, createOuter);
 ```
 
-# Podsumowanie
+## Podsumowanie
 
 Nauczyliśmy się, że jak mamy dużo instrukcji warunkowych w koordynatorach (orkiestratorach),
 to lepiej wydzielić odrębne funkcje reprezentujące mniej skomplikowane przepływy.
