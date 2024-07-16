@@ -21,81 +21,29 @@
   src: url('/fonts/Lovato\ Bold.otf');
 }
 
-html {
-  font-family: standard, sans-serif, Tahoma, Verdana;
-  font-size: 20px;
-}
-
-header,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.title {
-  font-family: sansy, Verdana, sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  text-decoration: underline;
-}
-
-a {
-  color: #df6363;
+:root {
+  --main-color: rgb(23, 23, 32);
+  --main-bg-color: rgb(232, 232, 203);
+  --dimmed-color: gray;
+  --accent: #0b7215;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --main-color: rgb(232, 232, 203);
     --main-bg-color: rgb(23, 23, 32);
-  }
-
-  .dimmed {
-    color: rgb(178, 178, 149);
-  }
-
-  .border__dimmed {
-    border-color: rgb(178, 178, 149);
-  }
-
-  a:hover,
-  a:focus {
-    text-decoration-color: #a1df63;
-  }
-
-  header {
-    background-color: rgb(23, 23, 32);
+    --dimmed-color: rgb(178, 178, 149);
+    --accent: #a1df63;
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --main-color: rgb(23, 23, 32);
-    --main-bg-color: rgb(232, 232, 203);
-  }
+* {
+  box-sizing: border-box;
+}
 
-  .dimmed {
-    color: gray;
-  }
-
-  .border__dimmed {
-    border-color: gray;
-  }
-
-  a:hover,
-  a:focus {
-    text-decoration-color: #0b7215;
-  }
-
-  header {
-    background-color: rgb(232, 232, 203);
-  }
+html {
+  font-family: standard, sans-serif, Tahoma, Verdana;
+  font-size: 20px;
 }
 
 body {
@@ -108,27 +56,15 @@ body {
   max-width: 120ch;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-header {
-  border-bottom: solid;
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-}
-
-.wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-.content {
-  flex: 1;
+header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title {
+  font-family: sansy, Verdana, sans-serif;
 }
 
 footer {
@@ -145,8 +81,47 @@ pre {
   overflow-x: auto;
 }
 
+a {
+  text-decoration: none;
+  color: #df6363;
+}
+
+a:hover,
+a:focus {
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
+}
+
+header {
+  border-bottom: solid;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: var(--main-bg-color);
+}
+
 @media (prefers-color-scheme: light) {
   pre {
     filter: invert(100%);
   }
+}
+
+.dimmed {
+  color: var(--dimmed-color);
+}
+
+.border__dimmed {
+  border-color: var(--dimmed-color);
+}
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.content {
+  flex: 1;
 }
