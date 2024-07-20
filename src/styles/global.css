@@ -28,6 +28,23 @@
   --accent: #0b7215;
 }
 
+@media (prefers-color-scheme: light) {
+  #sun {
+    display: none;
+  }
+
+    #color-mode-switch:not(:checked) ~ #moon {
+    display: none;
+  }
+
+  #color-mode-switch:checked ~ .wrapper {
+    --main-color: rgb(232, 232, 203);
+    --main-bg-color: rgb(23, 23, 32);
+    --dimmed-color: rgb(178, 178, 149);
+    --accent: #a1df63;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --main-color: rgb(232, 232, 203);
@@ -35,6 +52,31 @@
     --dimmed-color: rgb(178, 178, 149);
     --accent: #a1df63;
   }
+
+  #moon {
+    display: none;
+  }
+
+  #color-mode-switch:checked ~ .wrapper {
+    --main-color: rgb(23, 23, 32);
+    --main-bg-color: rgb(232, 232, 203);
+    --dimmed-color: gray;
+    --accent: #0b7215;
+  }
+}
+
+#color-mode-switch {
+  display: none;
+}
+
+.color-mode {
+  position: fixed;
+  bottom: 1vh;
+  right: 2vh;
+}
+
+path {
+  fill: #df6363;
 }
 
 * {
@@ -51,9 +93,15 @@ body {
   background-color: var(--main-bg-color);
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+  min-height: 100vh;
+  /* Ensure the body takes up at least the full viewport height */
   margin: 0 auto;
   max-width: 120ch;
+}
+
+.wrapper {
+  color: var(--main-color);
+  background-color: var(--main-bg-color);
 }
 
 header,
