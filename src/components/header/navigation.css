@@ -17,6 +17,7 @@
 
 .lang-content {
   display: none;
+  font-size: 1rem;
   position: absolute;
   right: 0;
   background-color: var(--main-bg-color);
