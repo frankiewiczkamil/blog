@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import './latest/PostTiles.css';
 import type { Post } from '../layouts/post/postLayout';
 
@@ -15,11 +16,7 @@ const t = useTranslations(lang);
   <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; ">
     <h2>{t('blog.all-posts')}</h2>
     <a href={getRelativeLocaleUrl(lang, '/')} title={t('blog.switch-to-grid')}>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
-        <path
-          d="M120-520v-320h320v320H120Zm0 400v-320h320v320H120Zm400-400v-320h320v320H520Zm0 400v-320h320v320H520ZM200-600h160v-160H200v160Zm400 0h160v-160H600v160Zm0 400h160v-160H600v160Zm-400 0h160v-160H200v160Zm400-400Zm0 240Zm-240 0Zm0-240Z"
-        ></path>
-      </svg>
+      <Icon name="material-symbols:grid-view-outline" />
     </a>
   </div>
   <ul>
