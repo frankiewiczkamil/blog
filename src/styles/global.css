@@ -26,6 +26,7 @@
   --main-bg-color: rgb(232, 232, 203);
   --dimmed-color: gray;
   --accent: #0b7215;
+  --link-color: #df6363;
 }
 
 #moon {
@@ -90,7 +91,15 @@
 }
 
 path {
-  fill: #df6363;
+  fill: var(--main-color);
+}
+a path {
+  fill: var(--link-color);
+}
+
+a:hover {
+  /* anchors with svg need that */
+  cursor: pointer;
 }
 
 * {
@@ -103,8 +112,6 @@ html {
 }
 
 body {
-  color: var(--main-color);
-  background-color: var(--main-bg-color);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -145,7 +152,7 @@ pre {
 
 a {
   text-decoration: none;
-  color: #df6363;
+  color: var(--link-color);
 }
 
 a:hover,
@@ -183,7 +190,7 @@ header {
   padding-left: 1em;
   padding-right: 1em;
 }
-#background{
+#background {
   position: fixed;
   top: 0;
   bottom: 0;

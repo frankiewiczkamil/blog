@@ -38,8 +38,6 @@
   display: block;
 }
 
-svg {
-  fill: var(--main-color);
-  width: 1em;
-  height: 1em;
+.icon-container path {
+  fill: var(--link-color);
 }

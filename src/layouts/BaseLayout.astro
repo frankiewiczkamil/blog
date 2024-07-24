@@ -28,11 +28,15 @@ import '../styles/global.css';
   <body>
     <input class="color-mode" id="color-mode-switch" type="checkbox" name="color-mode-switch" />
     <label id="moon" class="color-mode" for="color-mode-switch">
-      <Icon name="material-symbols:dark-mode-outline" />
+      <a role="button" title="Switch to light mode">
+        <Icon name="material-symbols:dark-mode-outline" />
+      </a>
     </label>
 
     <label id="sun" class="color-mode" for="color-mode-switch">
-      <Icon name="material-symbols:light-mode-outline" />
+      <a role="button" title="Switch to light mode">
+        <Icon name="material-symbols:light-mode-outline" />
+      </a>
     </label>
     <div class="wrapper">
       <Header />
