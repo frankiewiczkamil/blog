@@ -97,6 +97,9 @@ a path {
   fill: var(--link-color);
 }
 
+.larger {
+  font-size: 1.2em;
+}
 a:hover {
   /* anchors with svg need that */
   cursor: pointer;
