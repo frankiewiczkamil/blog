@@ -27,6 +27,9 @@
   --dimmed-color: gray;
   --accent: #0b7215;
   --link-color: #df6363;
+  --semi-transparent-5: rgba(0, 0, 0, 0.05);
+  --semi-transparent-10: rgba(0, 0, 0, 0.1);
+  --semi-transparent-20: rgba(0, 0, 0, 0.2);
 }
 
 #moon {
@@ -51,6 +54,9 @@
     --main-bg-color: rgb(23, 23, 32);
     --dimmed-color: rgb(178, 178, 149);
     --accent: #a1df63;
+    --semi-transparent-5: rgba(255, 255, 255, 0.05);
+    --semi-transparent-10: rgba(255, 255, 255, 0.1);
+    --semi-transparent-20: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -60,6 +66,9 @@
     --main-bg-color: rgb(23, 23, 32);
     --dimmed-color: rgb(178, 178, 149);
     --accent: #a1df63;
+    --semi-transparent-5: rgba(255, 255, 255, 0.05);
+    --semi-transparent-10: rgba(255, 255, 255, 0.1);
+    --semi-transparent-20: rgba(255, 255, 255, 0.2);
   }
 
   #color-mode-switch:not(:checked) ~ #sun {
@@ -77,6 +86,9 @@
     --main-bg-color: rgb(232, 232, 203);
     --dimmed-color: gray;
     --accent: #0b7215;
+    --semi-transparent-5: rgba(0, 0, 0, 0.05);
+    --semi-transparent-10: rgba(0, 0, 0, 0.1);
+    --semi-transparent-20: rgba(0, 0, 0, 0.2);
   }
 }
 

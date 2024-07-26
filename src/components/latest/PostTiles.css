@@ -84,27 +84,14 @@
   text-align: justify;
 }
 
-@media (prefers-color-scheme: light) {
-  .tile {
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.1);
-  }
-
-  .tile:hover {
-    background-color: rgba(100, 100, 100, 0.2);
-    box-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.1);
-  }
+.tile {
+  background-color: var(--semi-transparent-5);
+  box-shadow: 0.1em 0.1em 0.1em var(--semi-transparent-10);
 }
 
-@media (prefers-color-scheme: dark) {
-  .tile {
-    background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: 0.1em 0.1em 0.1em rgba(255, 255, 255, 0.1);
-  }
-
-  .tile:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+.tile:hover {
+  background-color: var(--semi-transparent-10);
+  box-shadow: 0.1em 0.1em 0.1em var(--semi-transparent-20);
 }
 
 .tile__title {
