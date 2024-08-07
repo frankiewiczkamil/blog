@@ -38,6 +38,6 @@
   display: block;
 }
 
-.icon-container path {
-  fill: var(--link-color);
+.icon-container {
+  color: var(--link-color);
 }

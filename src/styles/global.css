@@ -102,11 +102,8 @@
   right: 2vh;
 }
 
-path {
-  fill: var(--main-color);
-}
-a path {
-  fill: var(--link-color);
+svg {
+  fill: currentColor;
 }
 
 .larger {
