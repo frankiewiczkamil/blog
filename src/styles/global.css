@@ -171,6 +171,7 @@ a:hover,
 a:focus {
   text-decoration-line: underline;
   text-decoration-color: var(--accent);
+  text-decoration-thickness: 0.15em;
 }
 
 header {
