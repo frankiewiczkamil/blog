@@ -1,14 +1,23 @@
 :root {
-  --main-color: black;
-  --main-bg-color: white;
-  --dimmed-color: gray;
-  --accent: green;
-  --link-color: rebeccapurple;
-  --hovered-link-color: indigo;
+  --dark-main-color: honeydew;
+  --dark-main-bg-color: rgb(23, 23, 32);
+  --dark-dimmed-color: rgb(178, 178, 149);
+  --dark-accent: limegreen;
+  --dark-link-color: indianred;
+  --dark-hovered-link-color: lightcoral;
+  --dark-semi-transparent-5: rgba(255, 255, 255, 0.05);
+  --dark-semi-transparent-10: rgba(255, 255, 255, 0.1);
+  --dark-semi-transparent-20: rgba(255, 255, 255, 0.2);
 
-  --semi-transparent-5: rgba(0, 0, 0, 0.05);
-  --semi-transparent-10: rgba(0, 0, 0, 0.1);
-  --semi-transparent-20: rgba(0, 0, 0, 0.2);
+  --light-main-color: black;
+  --light-main-bg-color: white;
+  --light-dimmed-color: gray;
+  --light-accent: green;
+  --light-link-color: rebeccapurple;
+  --light-hovered-link-color: indigo;
+  --light-semi-transparent-5: rgba(0, 0, 0, 0.05);
+  --light-semi-transparent-10: rgba(0, 0, 0, 0.1);
+  --light-semi-transparent-20: rgba(0, 0, 0, 0.2);
 }
 
 #color-mode-switch,
@@ -18,6 +27,18 @@
 }
 
 @media (prefers-color-scheme: light) {
+  :root {
+    --main-color: var(--light-main-color);
+    --main-bg-color: var(--light-main-bg-color);
+    --dimmed-color: var(--light-dimmed-color);
+    --accent: var(--light-accent);
+    --link-color: var(--light-link-color);
+    --hovered-link-color: var(--light-hovered-link-color);
+    --semi-transparent-5: var(--light-semi-transparent-5);
+    --semi-transparent-10: var(--light-semi-transparent-10);
+    --semi-transparent-20: var(--light-semi-transparent-20);
+  }
+
   #color-mode-switch:not(:checked) ~ #moon,
   #color-mode-switch:checked ~ #sun {
     display: block;
@@ -25,29 +46,29 @@
   #color-mode-switch:checked ~ #sun,
   #color-mode-switch:checked ~ #background,
   #color-mode-switch:checked ~ .wrapper {
-    --main-color: rgb(232, 232, 203);
-    --main-bg-color: rgb(23, 23, 32);
-    --dimmed-color: rgb(178, 178, 149);
-    --accent: limegreen;
-    --link-color: indianred;
-    --hovered-link-color: lightcoral;
-    --semi-transparent-5: rgba(255, 255, 255, 0.05);
-    --semi-transparent-10: rgba(255, 255, 255, 0.1);
-    --semi-transparent-20: rgba(255, 255, 255, 0.2);
+    --main-color: var(--dark-main-color);
+    --main-bg-color: var(--dark-main-bg-color);
+    --dimmed-color: var(--dark-dimmed-color);
+    --accent: var(--dark-accent);
+    --link-color: var(--dark-link-color);
+    --hovered-link-color: var(--dark-hovered-link-color);
+    --semi-transparent-5: var(--dark-semi-transparent-5);
+    --semi-transparent-10: var(--dark-semi-transparent-10);
+    --semi-transparent-20: var(--dark-semi-transparent-20);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --main-color: rgb(232, 232, 203);
-    --main-bg-color: rgb(23, 23, 32);
-    --dimmed-color: rgb(178, 178, 149);
-    --accent: limegreen;
-    --link-color: indianred;
-    --hovered-link-color: lightcoral;
-    --semi-transparent-5: rgba(255, 255, 255, 0.05);
-    --semi-transparent-10: rgba(255, 255, 255, 0.1);
-    --semi-transparent-20: rgba(255, 255, 255, 0.2);
+    --main-color: var(--dark-main-color);
+    --main-bg-color: var(--dark-main-bg-color);
+    --dimmed-color: var(--dark-dimmed-color);
+    --accent: var(--dark-accent);
+    --link-color: var(--dark-link-color);
+    --hovered-link-color: var(--dark-hovered-link-color);
+    --semi-transparent-5: var(--dark-semi-transparent-5);
+    --semi-transparent-10: var(--dark-semi-transparent-10);
+    --semi-transparent-20: var(--dark-semi-transparent-20);
   }
 
   #color-mode-switch:not(:checked) ~ #sun,
@@ -58,15 +79,15 @@
   #color-mode-switch:checked ~ #moon,
   #color-mode-switch:checked ~ #background,
   #color-mode-switch:checked ~ .wrapper {
-    --main-color: black;
-    --main-bg-color: white;
-    --dimmed-color: gray;
-    --accent: green;
-    --link-color: rebeccapurple;
-    --hovered-link-color: indigo;
-    --semi-transparent-5: rgba(0, 0, 0, 0.05);
-    --semi-transparent-10: rgba(0, 0, 0, 0.1);
-    --semi-transparent-20: rgba(0, 0, 0, 0.2);
+    --main-color: var(--light-main-color);
+    --main-bg-color: var(--light-main-bg-color);
+    --dimmed-color: var(--light-dimmed-color);
+    --accent: var(--light-accent);
+    --link-color: var(--light-link-color);
+    --hovered-link-color: var(--light-hovered-link-color);
+    --semi-transparent-5: var(--light-semi-transparent-5);
+    --semi-transparent-10: var(--light-semi-transparent-10);
+    --semi-transparent-20: var(--light-semi-transparent-20);
   }
 }
 
@@ -159,7 +180,7 @@ a:focus {
 header {
   border-bottom: solid;
   position: sticky;
-  top: 0px;
+  top: 0;
   z-index: 1;
   background-color: var(--main-bg-color);
 }
