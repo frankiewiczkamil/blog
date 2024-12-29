@@ -1,36 +1,36 @@
 :root {
-  --main-color: rgb(23, 23, 32);
-  --main-bg-color: rgb(232, 232, 203);
+  --main-color: black;
+  --main-bg-color: white;
   --dimmed-color: gray;
-  --accent: #0b7215;
-  --link-color: #df6363;
+  --accent: green;
+  --link-color: rebeccapurple;
+  --hovered-link-color: indigo;
+
   --semi-transparent-5: rgba(0, 0, 0, 0.05);
   --semi-transparent-10: rgba(0, 0, 0, 0.1);
   --semi-transparent-20: rgba(0, 0, 0, 0.2);
 }
 
-#moon {
-  display: none;
-}
+#color-mode-switch,
+#moon,
 #sun {
   display: none;
 }
 
 @media (prefers-color-scheme: light) {
-  #color-mode-switch:not(:checked) ~ #moon {
-    display: block;
-  }
+  #color-mode-switch:not(:checked) ~ #moon,
   #color-mode-switch:checked ~ #sun {
     display: block;
   }
-  #color-mode-switch:checked ~ #background {
-    --main-bg-color: rgb(23, 23, 32);
-  }
+  #color-mode-switch:checked ~ #sun,
+  #color-mode-switch:checked ~ #background,
   #color-mode-switch:checked ~ .wrapper {
     --main-color: rgb(232, 232, 203);
     --main-bg-color: rgb(23, 23, 32);
     --dimmed-color: rgb(178, 178, 149);
-    --accent: #a1df63;
+    --accent: limegreen;
+    --link-color: indianred;
+    --hovered-link-color: lightcoral;
     --semi-transparent-5: rgba(255, 255, 255, 0.05);
     --semi-transparent-10: rgba(255, 255, 255, 0.1);
     --semi-transparent-20: rgba(255, 255, 255, 0.2);
@@ -42,35 +42,32 @@
     --main-color: rgb(232, 232, 203);
     --main-bg-color: rgb(23, 23, 32);
     --dimmed-color: rgb(178, 178, 149);
-    --accent: #a1df63;
+    --accent: limegreen;
+    --link-color: indianred;
+    --hovered-link-color: lightcoral;
     --semi-transparent-5: rgba(255, 255, 255, 0.05);
     --semi-transparent-10: rgba(255, 255, 255, 0.1);
     --semi-transparent-20: rgba(255, 255, 255, 0.2);
   }
 
-  #color-mode-switch:not(:checked) ~ #sun {
-    display: block;
-  }
+  #color-mode-switch:not(:checked) ~ #sun,
   #color-mode-switch:checked ~ #moon {
     display: block;
   }
 
-  #color-mode-switch:checked ~ #background {
-    --main-bg-color: rgb(232, 232, 203);
-  }
+  #color-mode-switch:checked ~ #moon,
+  #color-mode-switch:checked ~ #background,
   #color-mode-switch:checked ~ .wrapper {
-    --main-color: rgb(23, 23, 32);
-    --main-bg-color: rgb(232, 232, 203);
+    --main-color: black;
+    --main-bg-color: white;
     --dimmed-color: gray;
-    --accent: #0b7215;
+    --accent: green;
+    --link-color: rebeccapurple;
+    --hovered-link-color: indigo;
     --semi-transparent-5: rgba(0, 0, 0, 0.05);
     --semi-transparent-10: rgba(0, 0, 0, 0.1);
     --semi-transparent-20: rgba(0, 0, 0, 0.2);
   }
-}
-
-#color-mode-switch {
-  display: none;
 }
 
 .color-mode {
@@ -88,6 +85,7 @@ svg {
 }
 a:hover {
   /* anchors with svg need that */
+  color: var(--hovered-link-color);
   cursor: pointer;
 }
 
@@ -113,11 +111,6 @@ body {
   /* Ensure the body takes up at least the full viewport height */
   margin: 0 auto;
   max-width: 120ch;
-}
-
-.wrapper {
-  color: var(--main-color);
-  background-color: var(--main-bg-color);
 }
 
 header,
@@ -159,7 +152,6 @@ a {
 
 a:hover,
 a:focus {
-  text-decoration-line: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 0.15em;
 }
@@ -172,12 +164,6 @@ header {
   background-color: var(--main-bg-color);
 }
 
-/* @media (prefers-color-scheme: light) {
-  pre {
-    filter: invert(100%);
-  }
-} */
-
 .dimmed {
   color: var(--dimmed-color);
 }
@@ -187,6 +173,9 @@ header {
 }
 
 .wrapper {
+  color: var(--main-color);
+  background-color: var(--main-bg-color);
+
   flex: 1;
   display: flex;
   flex-direction: column;
