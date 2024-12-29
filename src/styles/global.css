@@ -1,26 +1,3 @@
-@font-face {
-  font-family: 'sansy';
-  src: url('/fonts/Oxygen-Bold.ttf');
-}
-
-@font-face {
-  font-family: 'standard';
-  font-weight: normal;
-  src: url('/fonts/Lovato\ Regular.otf');
-}
-
-@font-face {
-  font-family: 'standard';
-  font-weight: bolder;
-  src: url('/fonts/Lovato\ Regular.otf');
-}
-
-@font-face {
-  font-family: 'standard';
-  font-weight: bold;
-  src: url('/fonts/Lovato\ Bold.otf');
-}
-
 :root {
   --main-color: rgb(23, 23, 32);
   --main-bg-color: rgb(232, 232, 203);
@@ -119,7 +96,13 @@ a:hover {
 }
 
 html {
-  font-family: standard, sans-serif, Tahoma, Verdana;
+  font-family:
+    Garamond,
+    -apple-system-ui-serif,
+    ui-serif,
+    Palatino,
+    Georgia,
+    serif;
   font-size: 20px;
 }
 
@@ -145,7 +128,14 @@ h4,
 h5,
 h6,
 .title {
-  font-family: sansy, Verdana, sans-serif;
+  font-family:
+    'Trebuchet MS',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Open Sans',
+    'Segoe UI',
+    'Verdana',
+    sans-serif;
 }
 
 footer {
