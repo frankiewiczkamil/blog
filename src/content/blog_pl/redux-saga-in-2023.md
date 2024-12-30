@@ -1,5 +1,5 @@
 ---
-title: Czy redux-saga jedt dobrym wyborem w 2023?
+title: Czy redux-saga jest dobrym wyborem w 2023?
 publishedAt: 2022-12-22
 editedAt: 2022-12-22
 description: Krajobraz rozwiązań do zarządzania stanem w 2023 roku i jak wpływa to na adopcję redux i redux-saga

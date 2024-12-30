@@ -5,7 +5,8 @@ editedAt: 2024-07-03
 description: 'Ograniczenia przeplatania komponentów serwerowych i klienckich'
 author: kpf
 tags:
-  ['component streaming', 'components mixing', 'components interleaving', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering']
+  ['component streaming', 'components interleaving', 'ssr', 'server side rendering', 'next.js', 'react', 'client side rendering']
+
 image:
   url: layered-cake
   alt: 🍰

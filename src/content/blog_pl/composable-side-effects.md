@@ -4,7 +4,7 @@ publishedAt: 2023-03-19
 editedAt: 2024-07-02
 description: 'Przegląd technik obsługi efektów ubocznych: uzyskiwanie DRY, bez dodatkowej złożoności przypadkowej.'
 author: kpf
-tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'reużywalność', 'orkiestracja', 'DRY']
+tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga']
 image:
   url: gears
   alt: ⚙️⚙️⚙️

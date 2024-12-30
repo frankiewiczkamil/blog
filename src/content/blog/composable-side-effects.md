@@ -4,7 +4,7 @@ publishedAt: 2023-03-19
 editedAt: 2024-07-02
 description: 'Exploring the art of side effects handling: navigating trade-offs between DRY and complexity.'
 author: kpf
-tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga', 'DRY']
+tags: ['side effects', 'orchestrating', 'composable', 'async', 'redux', 'redux-saga']
 image:
   url: gears
   alt: ⚙️⚙️⚙️

@@ -4,7 +4,7 @@ publishedAt: 2023-12-16
 editedAt: 2024-07-08
 description: 'Next 13+: ewolucja czu rewolucja?'
 author: kpf
-tags: ['RSC', 'ssr', 'server side rendering', 'next.js', 'next', 'react', 'client side rendering', 'CSR', 'SSG', 'suspense']
+tags: ['RSC', 'SSR', 'server side rendering', 'next.js', 'react', 'client side rendering','suspense']
 image:
   url: rice-plantation
   alt: 🚧

@@ -4,7 +4,7 @@ publishedAt: 2022-12-03
 editedAt: 2022-12-11
 description: 'Ten pierwszy: kim jestem, co tu będę robił, dlaczego i dlaczego dopiero teraz.'
 author: 'kpf'
-tags: ['personal', 'blogging', 'lurker']
+tags: ['personal', 'blogging', 'hello world', 'lurker']
 image:
   url: avenue
   alt: 🧳🧳🧳

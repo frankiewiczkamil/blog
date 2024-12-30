@@ -4,7 +4,7 @@ publishedAt: 2022-12-14
 editedAt: 2023-09-30
 description: Jak zmieniać stan w komponentach funkcyjnych bez utraty wydajności
 author: kpf
-tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'howto', 'render', 'performance', 'react']
+tags: ['functional component', 'class component', 'hooks', 'useState', 'reducer', 'render', 'performance', 'react']
 image:
   url: rocket-launch
   alt: 🚀 🚀 🚀
