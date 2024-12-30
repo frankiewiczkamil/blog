@@ -37,27 +37,28 @@ const postz = await Promise.all(
   <div class="tiles-container">
     {
       postz.map(post => (
-        <article class="tile">
-          <a class="tile__link-container" href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}>
-            <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
-              <Picture
-                class="tile__picture"
-                src={post.picture.src}
-                formats={['avif', 'webp', 'jpg']}
-                alt={post.data.image?.alt || '🖼️'}
-                width="1280"
-                transition:name={'img_' + post.slug}
-              />
-              <div class="tile__title title" transition:name={'title_' + post.slug}>
-                {post.data.title}
-              </div>
+        <a class="tile__link-container tile" href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}>
+          <div class="tile__picture-container" style={`background-image: url(${post.placeholder.src})`}>
+            <Picture
+              class="tile__picture"
+              src={post.picture.src}
+              formats={['avif', 'webp', 'jpg']}
+              alt={post.data.image?.alt || '🖼️'}
+              width="1280"
+              transition:name={'img_' + post.slug}
+            />
+            <div class="tile__title sans" transition:name={'title_' + post.slug}>
+              {post.data.title}
             </div>
-            <div class="tile__description">{post.data.description}</div>
-            <span class="tile__date" transition:name={'publishedAt_' + post.slug}>
+          </div>
+          <div class="tile__details">
+            <div class="tile__details-description sans">{post.data.description}</div>
+            <div class="tile__tags sans">{post.data.tags.map(tag => ` #${tag.replaceAll(' ', '-')}`)}</div>
+            <span class="tile__date sans" transition:name={'publishedAt_' + post.slug}>
               {selectPostDate(post.data, lang)}
             </span>
-          </a>
-        </article>
+          </div>
+        </a>
       ))
     }
   </div>

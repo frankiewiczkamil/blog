@@ -2,6 +2,7 @@
   --dark-main-color: honeydew;
   --dark-main-bg-color: rgb(23, 23, 32);
   --dark-dimmed-color: rgb(178, 178, 149);
+  --dark-shadow-color: black;
   --dark-accent: limegreen;
   --dark-link-color: indianred;
   --dark-hovered-link-color: lightcoral;
@@ -10,8 +11,9 @@
   --dark-semi-transparent-20: rgba(255, 255, 255, 0.2);
 
   --light-main-color: black;
-  --light-main-bg-color: white;
+  --light-main-bg-color: snow;
   --light-dimmed-color: gray;
+  --light-shadow-color: silver;
   --light-accent: green;
   --light-link-color: rebeccapurple;
   --light-hovered-link-color: indigo;
@@ -31,6 +33,7 @@
     --main-color: var(--light-main-color);
     --main-bg-color: var(--light-main-bg-color);
     --dimmed-color: var(--light-dimmed-color);
+    --shadow-color: var(--light-shadow-color);
     --accent: var(--light-accent);
     --link-color: var(--light-link-color);
     --hovered-link-color: var(--light-hovered-link-color);
@@ -49,6 +52,7 @@
     --main-color: var(--dark-main-color);
     --main-bg-color: var(--dark-main-bg-color);
     --dimmed-color: var(--dark-dimmed-color);
+    --shadow-color: var(--dark-shadow-color);
     --accent: var(--dark-accent);
     --link-color: var(--dark-link-color);
     --hovered-link-color: var(--dark-hovered-link-color);
@@ -63,6 +67,7 @@
     --main-color: var(--dark-main-color);
     --main-bg-color: var(--dark-main-bg-color);
     --dimmed-color: var(--dark-dimmed-color);
+    --shadow-color: var(--dark-shadow-color);
     --accent: var(--dark-accent);
     --link-color: var(--dark-link-color);
     --hovered-link-color: var(--dark-hovered-link-color);
@@ -82,6 +87,7 @@
     --main-color: var(--light-main-color);
     --main-bg-color: var(--light-main-bg-color);
     --dimmed-color: var(--light-dimmed-color);
+    --shadow-color: var(--light-shadow-color);
     --accent: var(--light-accent);
     --link-color: var(--light-link-color);
     --hovered-link-color: var(--light-hovered-link-color);
@@ -141,7 +147,7 @@ h3,
 h4,
 h5,
 h6,
-.title {
+.sans {
   font-family:
     'Trebuchet MS',
     -apple-system,

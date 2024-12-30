@@ -5,9 +5,8 @@ export type Post = CollectionEntry<'blog' | 'blog_pl'>;
 
 export function selectPostDate({ publishedAt, editedAt }: PostData, locale?: Intl.LocalesArgument) {
   const publishedText = publishedAt?.toLocaleDateString(locale) || '';
-  const separator = publishedAt ? ', ' : '';
-  const editedText = editedAt ? `edited ${editedAt.toLocaleDateString(locale)}` : '';
-  return publishedText + separator + editedText;
+  const editedText = editedAt && editedAt?.getTime() !== publishedAt?.getTime() ? `, edited ${editedAt.toLocaleDateString(locale)}` : '';
+  return publishedText + editedText;
 }
 
 export const selectPublishedAtTimestamp = (post: Post) => new Date(post.data.publishedAt).getTime();
