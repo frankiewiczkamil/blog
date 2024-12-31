@@ -1,0 +1,75 @@
+---
+import { Icon } from 'astro-icon/components';
+import './PostList.css';
+import type { Post } from '../../layouts/post/postLayout';
+
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/lang-utils';
+import { getImage, Picture } from 'astro:assets';
+
+const { posts } = Astro.props as { posts: Post[] };
+
+const postz = await Promise.all(
+  posts.map(async post => {
+    const src = (await import(`../../pictures/${post.data.image?.url}.jpg`)).default;
+    const placeholder = await getImage({ src, format: 'avif', width: 40 });
+    return {
+      ...post,
+      picture: {
+        src,
+      },
+      placeholder,
+    };
+  }),
+);
+const lang = Astro.currentLocale as keyof typeof languages;
+const t = useTranslations(lang);
+---
+
+<section>
+  <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; ">
+    <h2>{t('blog.all-posts')}</h2>
+    <a href={getRelativeLocaleUrl(lang, '/')} title={t('blog.switch-to-grid')}>
+      <Icon name="material-symbols:grid-view-outline" class="larger" />
+    </a>
+  </div>
+  <ul class="list__container">
+    {
+      postz.map(post => (
+        <li>
+          <a href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}>
+            <div class="list__element sans">
+              <div class="list__element--picture-container">
+                <Picture
+                  class="list__element--picture"
+                  src={post.picture.src}
+                  formats={['avif', 'webp', 'jpg']}
+                  alt={post.data.image?.alt || '🖼️'}
+                  width="1280"
+                  transition:name={'img_' + post.slug}
+                />
+              </div>
+              <div class="list__element--metadata-container">
+                <div style="display: flex; flex-direction: row-reverse; justify-content: space-between; flex-wrap: wrap">
+                  <div transition:name={'publishedAt_' + post.slug} style="font-size: smaller">
+                    {post.data.publishedAt.toLocaleDateString()}
+                  </div>
+                  <div class="element__title" transition:name={'title_' + post.slug} style="font-size: larger">
+                    {post.data.title}
+                  </div>
+                </div>
+                <div style="font-size: smaller; font-style: italic; padding-top: 1em; padding-bottom: 1em">{post.data.description}</div>
+                <div style="font-size: smaller; font-family: monospace; color: var(--link-color); word-break: keep-all;">
+                  {post.data.tags.map(tag => (
+                    <span>{` #${tag.replaceAll(' ', '\u2011')}`}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

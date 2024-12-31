@@ -53,7 +53,7 @@ const postz = await Promise.all(
           </div>
           <div class="tile__details">
             <div class="tile__details-description sans">{post.data.description}</div>
-            <div class="tile__tags sans">{post.data.tags.map(tag => ` #${tag.replaceAll(' ', '-')}`)}</div>
+            <div class="tile__tags sans">{post.data.tags.map(tag => ` #${tag.replaceAll(' ', '\u2011')}`)}</div>
             <span class="tile__date sans" transition:name={'publishedAt_' + post.slug}>
               {selectPostDate(post.data, lang)}
             </span>
