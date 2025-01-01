@@ -11,7 +11,7 @@ const lang = Astro.currentLocale as keyof typeof languages;
 ---
 
 <BaseLayout>
-  <section class="meta__timestamp" transition:name={'publishedAt_' + slug}>
+  <section class="meta__timestamp sans" transition:name={'publishedAt_' + slug}>
     {selectPostDate(frontmatter, lang)}
   </section>
 
