@@ -24,3 +24,9 @@ img {
 .meta__title {
   clear: right;
 }
+
+.meta__tags {
+  font-size: smaller;
+  font-family: monospace;
+  color: var(--link-color);
+}

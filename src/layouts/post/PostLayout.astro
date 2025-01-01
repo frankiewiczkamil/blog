@@ -6,8 +6,8 @@ import { Picture } from 'astro:assets';
 import { languages } from '../../i18n/ui';
 const { frontmatter, slug } = Astro.props;
 const src = (await import(`../../pictures/${frontmatter.image.url}.jpg`)).default;
-
 const lang = Astro.currentLocale as keyof typeof languages;
+const tags = frontmatter.tags.map((tag: string) => ` #${tag.replaceAll(' ', '\u2011')}`);
 ---
 
 <BaseLayout>
@@ -16,8 +16,9 @@ const lang = Astro.currentLocale as keyof typeof languages;
   </section>
 
   <h1 class="meta__title" transition:name={'title_' + slug}>{frontmatter.title}</h1>
+  <span class="meta__tags sans">{tags}</span>
 
-  <div>
+  <div style="padding-top: 1em">
     <Picture class="tile__picture" src={src} formats={['avif', 'webp', 'jpg']} alt={frontmatter.image.alt} width="1280" transition:name={'img_' + slug} />
   </div>
 
