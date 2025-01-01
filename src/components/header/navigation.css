@@ -1,16 +1,15 @@
 .nav-links a {
   font-weight: bold;
   padding-right: 0.5em;
-  padding-left: 0.5em;
 }
 
 .nav-links {
-  font-size: 1.5rem;
+  font-size: xx-large;
 }
 
 .lang-switch {
   position: absolute;
-  bottom: 0.1em;
+  bottom: 0.2em;
   right: 0;
   height: 1em;
 }
@@ -23,7 +22,7 @@
   background-color: var(--main-bg-color);
   padding: 0.5em;
   z-index: 1;
-  border: solid;
+  border: solid 0.01em var(--semi-transparent-20);
 }
 
 .lang-content a,
