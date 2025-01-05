@@ -1,7 +1,7 @@
 ---
 title: Podsumowanie 2023 i plany na 2024
 publishedAt: 2024-01-21
-description: 'Podsumowanie 2023 pod kątem technicznym. Rozwój, zdobyte doświadczenia, obserwacje i plany na 2023.'
+description: 'Podsumowanie 2023 pod kątem technicznym. Rozwój, zdobyte doświadczenia, obserwacje i plany na 2024.'
 author: kpf
 tags: [summary, '2023', '2024', plans]
 image:
