@@ -6,7 +6,7 @@ description: 'Two aspects of AI and the role it will play in the future'
 author: kpf
 tags: [ AI, Vibe coding, MCP, future ]
 image:
-  url: 'future-city'
+  url: 'city-and-robot'
   alt: 🤖
 draft: false
 ---
