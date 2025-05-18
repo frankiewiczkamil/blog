@@ -1,87 +1,113 @@
 ---
 title: Will AI replace the code as we know it?
-publishedAt: 2025-05-18
+publishedAt: 2025-05-17
+editedAt: 2025-05-18
 description: 'Two aspects of AI and the role it will play in the future'
 author: kpf
-tags: [ AI, Vibe coding, MCP ]
+tags: [ AI, Vibe coding, MCP, future ]
 image:
   url: 'future-city'
   alt: 🤖
 draft: false
 ---
 
-First of all, let's state the obvious: AI changes software development before our eyes.
-We have all sorts of AI based code completion tools, but also new concepts arise every day:
-_vibe coding_, _MCP_
-to name the two new, and significant ones.
+First of all, let’s state the obvious:
+AI is transforming software development before our eyes.
+We already have a wide range of AI-powered code completion tools,
+and new concepts are emerging every day — _vibe coding_ and _MCP_,
+to name two recent and significant examples.
 
-And those two are actually a good example of two general ways in which AI will go:
+And those two are actually a good illustration of the two main directions in which AI is evolving:
 
-- generating "classical" code in exising languages (compiled, interpreted - doesn't really matter),
-where ***user's action triggers some code that will be executed in order to fulfill the user's request***
-- replacing services that use the "classical" code with AI-based services, 
-meaning ***user's action triggers AI that will output something needed for fulfilling the user's request***
+- Generating standard code in existing languages (compiled or interpreted — it doesn’t really matter), 
+where ***the user's action triggers traditional code that gets executed to fulfill the request.***
 
-The first one is obvious and can help for arguably any existing project.
-The second one, however, is actually a more tricky one. 
-I remember the first time when I heard about this idea: it was the Erik Meyer's presentation 
+- Replacing existing code artifacts (methods, functions, procedures, ...)
+with AI calls, meaning ***the user's action triggers an AI that generates the output needed to fulfill the request.***
+
+The first one is well known — it's essentially a more sophisticated engine for IDE auto-completion.
+The second one, however, is far more intriguing.
+I still remember the first time I encountered this concept — it was Erik Meyer’s presentation,
 [Alchemy For the Modern Computer Scientist](https://www.youtube.com/watch?v=6NXHIRyQOC8),
-and it was a mind-blowing experience for me at that time.
-The interesting question here is if AI can replace the "classical" code ***totally***.
-Theoretically, we can embed AI on any device and call it instead of calling a function/method.
+and it was genuinely mind-blowing.
 
-More and more devices get hardware supported for that these days.
-But is it uninventable and only future?
-Is that true for _every_ type of software/service/device?
+Of course, this isn’t an either-or situation.
+In fact, the second approach **must** currently be blended with existing code.
+The nice thing is that we can adopt it gradually,
+replacing increasingly larger parts of our software with AI-based components.
+That leads to a question,
+whether we’ll eventually reach a point where AI can replace traditional code ***entirely*** (or almost entirely).
+Theoretically, we can use AI on any device and call it instead of calling the conventional code.
 
-As you may already suspect, 
+That sounds feasible — after all, more and more devices get hardware support for that these days, right?
+So is it uninventable and only future?
+Is it possible across _all_ types of software, services, and devices?
+
+As you might have guessed,
 I think that semiconductor-based devices we use today have some natural and obvious places,
-where AI services would not make that much sense.
-My goal here is to explore those and try to categorize them somehow.
+where AI services will not fit, no matter what.
+My goal here is to explore those and try to categorize them.
 
-Let's start with fundamentals:
-would we benefit from native, AI-based support in the software like OS?
-Well, in some scenarios, surely. We can optimize battery life, reduce power consumption, 
-turn services on and off based on user's behavior and so on.
+Let's begin with fundamentals:
+would an operating system benefit from AI integration?
+In some ways, yes.
+We could collect behavioral data from users
+and apply it to improve battery life, manage resources, and so on.
 
-But would it be beneficial to use AI in "elementary particles" of our kernel, like system calls?
-Doesn't sound right, does it?
-Even if performance and resource consumption is not an issue (but it is, actually, even with native hardware support),
-***it's not deterministic***, and that means that it is actually ***unsafe*** at is core.  
-And all that will be true for any "embedded" device, like IoT etc.
+Can you already spot the wall?
+Would it be beneficial to use the AI as the "elementary particles" of our kernel, like system calls?
 
-Ok, so we will have some low-level code written once, but then we can use AI for any higher-level code, right?
+That doesn’t sound right, does it?
+Even if performance and resource consumption weren’t an issue
+(which they absolutely are — even with native AI hardware support),
+AI is still ***not deterministic***.
+And that makes it ***inherently unsafe***.
+This is even more relevant when we talk about embedded devices, IoT systems, and similar.
 
-You guessed it: I don't think so.
-Would asking AI about the balance in our bank account be a good idea?
-"Normal" processors are actually quite good in mathematical operations.
-Just like with OS'es:
-It's time and power efficient. 
-It's safe.
-It's deterministic.
+So maybe we will leave the low-level code in place,
+and just use AI for higher-level functionalities?
 
-And there is one very important consequence of the latter here:
-as humans, we often need to audit the already executed code, to see why certain outcome was achieved.
+Well, again, not quite.
+Would you want to ask an AI for your bank account balance?
+Traditional processors are extremely efficient at numerical operations.
+And — just like with OS kernels — low-level code is:
 
-That's almost not possible with AI.
-And this thing is a big deal, because of civilisation we live in.
-Now that is true for many, many aspects of our lives.
-We might allow our fridge to order the food,
-but would we trust it to request stuff on a say: company level, or government level?
-What about security and surveillance?
-Do we want the world from _Minority Report_?
+- Fast and power-efficient,
+- Safe,
+- Deterministic.
 
-And so on and so on.
+That last point is crucial:
+we often need to **audit** what happened, 
+to inspect the code that executed and understand **why** a particular outcome occurred.
+
+With AI, that’s nearly impossible.
+And this issue ***matters a lot*** because of the world we live in.
+Now that is true for many, many aspects of our lives. 
+Letting your fridge reorder groceries? Sure.
+Letting AI make procurement decisions for a company or government?
+That’s a different conversation entirely.
+
+What about security? Surveillance?
+Do we really want to live in a world like the one depicted in _Minority Report_?
+
+
+And so on, and so forth.
 
 ## Summary
 
-We know that AI is capable of replacing many services, the question is about the boundaries.
+AI is already capable of replacing many services —
+the real question is about **boundaries**.
 
-Times are volatile, and - like always - law is behind the technology, 
-so it's market and people's will what shapes it now.
+We live in turbulent times, and as always,
+legislation is lagging behind technology.
+For now, it’s market forces and public opinion that shape adoption.
 
-However, I bet that sooner or later, we will reach the point where we will agree that we need to codify that.
-It's not about programmers preference, IT jobs, or manufacturers business.
+Still, I believe the day will come when we collectively agree that we ***do need to codify these boundaries***.
+This isn't about developer preferences, IT jobs, or the business interests of hardware vendors.
 
-It's rather a philosophical question that may influence the future of the humanity. 
-Let's hope we will make it right.
+This is a **philosophical** issue,
+one that could profoundly impact the future of human civilization.
+Let’s hope we get it right🤞.
+
+Cheers! 🖖
+
